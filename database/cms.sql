@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2022 at 05:09 PM
+-- Generation Time: Jan 10, 2022 at 05:56 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -25,6 +25,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `email_otp_verification`
+--
+
+CREATE TABLE `email_otp_verification` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `otp` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -40,7 +54,8 @@ CREATE TABLE `migrations` (
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
-(2, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+(2, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(3, '2021_08_01_153542_email_otp_verification', 2);
 
 -- --------------------------------------------------------
 
@@ -85,11 +100,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `phone`, `role`, `password`, `address`, `picture`, `created_at`, `updated_at`) VALUES
-(1, 'Md Anwar Hossain', 'anwar7736', 'anwarhossain7736@gmail.com', '01794030592', 'user', '$2y$10$T7bC48aFHZM1M8LNVxMMeuo3iytEWx0mos5cYF3v226gzN6lTo3wO', NULL, NULL, '2022-01-09 09:42:41', '2022-01-09 09:42:41');
+(1, 'Md Anwar Hossain', 'anwar7736', 'anwarhossain7736@gmail.com', '01794030592', 'user', '$2y$10$2xW3TWJVNSq2t0NinAH7p.3vWo3tKNxqimj2pKBlSiFa1xZszVAoa', NULL, NULL, '2022-01-09 09:42:41', '2022-01-10 09:57:32');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `email_otp_verification`
+--
+ALTER TABLE `email_otp_verification`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -118,10 +139,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `email_otp_verification`
+--
+ALTER TABLE `email_otp_verification`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
