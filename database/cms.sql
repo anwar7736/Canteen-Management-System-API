@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2022 at 05:56 PM
+-- Generation Time: Jan 11, 2022 at 07:08 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -35,6 +35,13 @@ CREATE TABLE `email_otp_verification` (
   `time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `email_otp_verification`
+--
+
+INSERT INTO `email_otp_verification` (`id`, `email`, `otp`, `time`, `date`) VALUES
+(41, 'anwarhossain7736@gmail.com', '494080', '12:11:21am', '2022-01-12');
 
 -- --------------------------------------------------------
 
@@ -90,7 +97,7 @@ CREATE TABLE `users` (
   `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `picture` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `photo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -99,8 +106,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `phone`, `role`, `password`, `address`, `picture`, `created_at`, `updated_at`) VALUES
-(1, 'Md Anwar Hossain', 'anwar7736', 'anwarhossain7736@gmail.com', '01794030592', 'user', '$2y$10$2xW3TWJVNSq2t0NinAH7p.3vWo3tKNxqimj2pKBlSiFa1xZszVAoa', NULL, NULL, '2022-01-09 09:42:41', '2022-01-10 09:57:32');
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `phone`, `role`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
+(1, 'Md Anwar Hossain', 'anwar1234', 'anwarhossain7736@gmail.com', '01794030592', 'user', '$2y$10$tn/HMydZFOUakOP6JMYVW.yAPsi1opgoSvANTseunZ.AwECakxyvi', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/76skcznDqcvbFZ1LjeYg2jdDeEOAUiPphCM6iAvi.jpg', '2022-01-09 09:42:41', '2022-01-11 12:07:57');
 
 --
 -- Indexes for dumped tables
@@ -142,7 +149,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `email_otp_verification`
 --
 ALTER TABLE `email_otp_verification`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `migrations`
