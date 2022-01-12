@@ -109,9 +109,24 @@ class PasswordController extends Controller
 
     function ChangePassword(Request $request)
     {
-        $username = $request->username;
+        $id = $request->id;
+        $oldpass = $request->oldpass;
         $newpass = Hash::make($request->newpass);
-        $result = User::where('username', $username)->update(['password' => $newpass]);
-        return $result;
+
+        $user = User::where('id', $id)->first();
+
+        if($user && Hash::check($oldpass, $user->password))
+        {   
+            $result = User::where('id', $id)->update(['password' => $newpass]);
+            if($result)
+            {
+                $name = $user->name;
+                Mail::to($user->email)->send(new PasswordUpdateMail($name));
+                return 1;  
+            }
+        }
+        else{
+            return 0;
+        }
     }
 }
