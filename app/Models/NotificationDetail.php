@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class NotificationDetail extends Model
 {
     use HasFactory;
+    public $timestamps = false;
 }

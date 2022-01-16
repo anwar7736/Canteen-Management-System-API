@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2022 at 08:43 PM
+-- Generation Time: Jan 16, 2022 at 07:36 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -111,6 +111,16 @@ CREATE TABLE `notifications` (
   `create_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `notifications`
+--
+
+INSERT INTO `notifications` (`id`, `author_id`, `author_name`, `msg_title`, `msg_body`, `create_date`, `create_time`) VALUES
+(4, 3, 'Anwar', 'Hello', 'Hello there, how are you?', '2022-01-16', '09:42:59pm'),
+(5, 1, 'Md Sujon Mollah', 'Check you mail', 'Dear All, Please check your mail', '2022-01-16', '09:44:45pm'),
+(9, 3, 'Anwar', 'Request for guest meal', 'Dear Admin,\r\nI want to  add some guest meal for 17-01-22', '2022-01-16', '10:04:05pm'),
+(10, 3, 'Md Anwar Hossain', 'Good Night', 'Good Night', '2022-01-17', '12:28:30am');
+
 -- --------------------------------------------------------
 
 --
@@ -125,6 +135,19 @@ CREATE TABLE `notification_details` (
   `create_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `create_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `notification_details`
+--
+
+INSERT INTO `notification_details` (`id`, `notification_id`, `user_id`, `status`, `create_date`, `create_time`) VALUES
+(2, 4, 1, 'Latest', '2022-01-16', '09:42:59pm'),
+(3, 5, 3, 'Read', '2022-01-16', '09:44:45pm'),
+(4, 5, 4, 'Latest', '2022-01-16', '09:44:45pm'),
+(5, 5, 5, 'Latest', '2022-01-16', '09:44:45pm'),
+(9, 9, 1, 'Latest', '2022-01-16', '10:04:05pm'),
+(10, 9, 3, 'Read', '2022-01-16', '10:04:05pm'),
+(11, 10, 1, 'Latest', '2022-01-17', '12:28:30am');
 
 -- --------------------------------------------------------
 
@@ -169,7 +192,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `phone`, `role`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
-(1, 'Md Anwar Hossain', 'anwar1234', 'anwarhossain7736@gmail.com', '01794030592', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10');
+(1, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
+(3, 'Md Anwar Hossain', 'anwar1234', 'user@gmail.com', '01795700838', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
+(4, 'Md Anwar Hossain', 'anwar1234', 'user2@gmail.com', '01795700837', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
+(5, 'Md Anwar Hossain', 'anwar12', 'user3@gmail.com', '01795700835', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10');
 
 --
 -- Indexes for dumped tables
@@ -247,13 +273,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `notification_details`
 --
 ALTER TABLE `notification_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -265,7 +291,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

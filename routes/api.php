@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DailyMealItemController;
+use App\Http\Controllers\NotificationController;
 
 //Login
 Route::post('/login', [LoginController::class, 'onLogin']);
@@ -28,7 +29,14 @@ Route::post('/UpdateProfile', [ProfileController::class, 'UpdateProfile']);
 
 Route::get('/GetDailyMealItem', [DailyMealItemController::class, 'GetDayWiseMealItem']);
 
+//Notification
 
+Route::post('/SendMessage', [NotificationController::class, 'InsertNotification']);
+Route::get('/GetSelfCreatedNotification/{user_id}', [NotificationController::class, 'GetSelfCreatedNotification']);
+Route::get('/GetAdminNotificationByUser/{user_id}', [NotificationController::class, 'GetAdminNotificationByUser']);
+Route::get('/CountLastestNotification/{user_id}', [NotificationController::class, 'CountLastestNotification']);
+Route::get('/SetUnreadStatus/{user_id}', [NotificationController::class, 'SetUnreadStatus']);
+Route::get('/SetReadStatus/{user_id}/{notification_id}', [NotificationController::class, 'SetReadStatus']);
 
 
 
