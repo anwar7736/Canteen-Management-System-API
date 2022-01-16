@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2022 at 07:08 PM
+-- Generation Time: Jan 15, 2022 at 08:43 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -21,6 +21,34 @@ SET time_zone = "+00:00";
 --
 -- Database: `cms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `daily_meal_items`
+--
+
+CREATE TABLE `daily_meal_items` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `day` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lunch_item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dinner_item` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `daily_meal_items`
+--
+
+INSERT INTO `daily_meal_items` (`id`, `day`, `lunch_item`, `dinner_item`, `created_at`, `updated_at`) VALUES
+(1, 'শনিবার', 'মুরগীর মাংস, সবজি, ডাল', 'বড় মাছ, ভর্তা, ডাল', NULL, NULL),
+(2, 'রবিবার', 'বড় মাংস, সবজি, ডাল', 'ছোট মাছ, ভর্তা, ডাল', NULL, NULL),
+(3, 'সোমবার', 'ডিম, ভর্তা, ডাল', 'বড় মাছ, সবজি, ডাল', NULL, NULL),
+(4, 'মঙ্গলবার', 'মুরগীর মাংস, সবজি, ডাল', 'মলা মাছ ভর্তা, ডাল', NULL, NULL),
+(5, 'বুধবার', 'বড় মাছ, শাক-সবজি, ডাল', 'বড় মাছ, আলু ভর্তা, ডাল', NULL, NULL),
+(6, 'বৃহস্পতিবার', 'ছোট মাছ, ভর্তা, ডাল', 'ভুনা খিচুড়ি, সবজি, ডাল', NULL, NULL),
+(7, 'শুক্রবার', 'গরুর মাংস, সবজি, ডাল', 'ডিম, শাক, ডাল', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -62,7 +90,41 @@ CREATE TABLE `migrations` (
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(3, '2021_08_01_153542_email_otp_verification', 2);
+(3, '2021_08_01_153542_email_otp_verification', 2),
+(4, '2022_01_15_180927_create_daily_meal_items_table', 3),
+(5, '2022_01_15_185710_create_notifications_table', 4),
+(6, '2022_01_15_190301_create_notification_details_table', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `author_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `msg_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `msg_body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `create_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `create_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification_details`
+--
+
+CREATE TABLE `notification_details` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `notification_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'unread',
+  `create_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `create_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -107,11 +169,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `phone`, `role`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
-(1, 'Md Anwar Hossain', 'anwar1234', 'anwarhossain7736@gmail.com', '01794030592', 'user', '$2y$10$tn/HMydZFOUakOP6JMYVW.yAPsi1opgoSvANTseunZ.AwECakxyvi', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/76skcznDqcvbFZ1LjeYg2jdDeEOAUiPphCM6iAvi.jpg', '2022-01-09 09:42:41', '2022-01-11 12:07:57');
+(1, 'Md Anwar Hossain', 'anwar1234', 'anwarhossain7736@gmail.com', '01794030592', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `daily_meal_items`
+--
+ALTER TABLE `daily_meal_items`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `email_otp_verification`
@@ -123,6 +191,18 @@ ALTER TABLE `email_otp_verification`
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `notification_details`
+--
+ALTER TABLE `notification_details`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -146,6 +226,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `daily_meal_items`
+--
+ALTER TABLE `daily_meal_items`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `email_otp_verification`
 --
 ALTER TABLE `email_otp_verification`
@@ -155,7 +241,19 @@ ALTER TABLE `email_otp_verification`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `notification_details`
+--
+ALTER TABLE `notification_details`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

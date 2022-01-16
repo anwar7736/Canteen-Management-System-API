@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\DailyMealItemController;
 
 //Login
 Route::post('/login', [LoginController::class, 'onLogin']);
@@ -23,7 +24,9 @@ Route::post('/UpdateProfile', [ProfileController::class, 'UpdateProfile']);
 
 
 
+//DayWiseMealItem
 
+Route::get('/GetDailyMealItem', [DailyMealItemController::class, 'GetDayWiseMealItem']);
 
 
 
