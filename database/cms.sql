@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2022 at 07:36 PM
+-- Generation Time: Jan 17, 2022 at 06:32 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -43,7 +43,7 @@ CREATE TABLE `daily_meal_items` (
 
 INSERT INTO `daily_meal_items` (`id`, `day`, `lunch_item`, `dinner_item`, `created_at`, `updated_at`) VALUES
 (1, 'শনিবার', 'মুরগীর মাংস, সবজি, ডাল', 'বড় মাছ, ভর্তা, ডাল', NULL, NULL),
-(2, 'রবিবার', 'বড় মাংস, সবজি, ডাল', 'ছোট মাছ, ভর্তা, ডাল', NULL, NULL),
+(2, 'রবিবার', 'বড় মাছ, সবজি, ডাল', 'ছোট মাছ, ভর্তা, ডাল', NULL, NULL),
 (3, 'সোমবার', 'ডিম, ভর্তা, ডাল', 'বড় মাছ, সবজি, ডাল', NULL, NULL),
 (4, 'মঙ্গলবার', 'মুরগীর মাংস, সবজি, ডাল', 'মলা মাছ ভর্তা, ডাল', NULL, NULL),
 (5, 'বুধবার', 'বড় মাছ, শাক-সবজি, ডাল', 'বড় মাছ, আলু ভর্তা, ডাল', NULL, NULL),
@@ -74,6 +74,28 @@ INSERT INTO `email_otp_verification` (`id`, `email`, `otp`, `time`, `date`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `meal_rates`
+--
+
+CREATE TABLE `meal_rates` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `lunch_rate` int(11) NOT NULL,
+  `dinner_rate` int(11) NOT NULL,
+  `total_rate` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `meal_rates`
+--
+
+INSERT INTO `meal_rates` (`id`, `lunch_rate`, `dinner_rate`, `total_rate`, `created_at`, `updated_at`) VALUES
+(1, 60, 50, 110, '2022-01-17 15:59:45', '2022-01-17 16:14:15');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -93,7 +115,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2021_08_01_153542_email_otp_verification', 2),
 (4, '2022_01_15_180927_create_daily_meal_items_table', 3),
 (5, '2022_01_15_185710_create_notifications_table', 4),
-(6, '2022_01_15_190301_create_notification_details_table', 4);
+(6, '2022_01_15_190301_create_notification_details_table', 4),
+(7, '2022_01_17_153007_create_meal_rates_table', 5),
+(8, '2022_01_17_153112_create_order_meals_table', 5);
 
 -- --------------------------------------------------------
 
@@ -152,6 +176,34 @@ INSERT INTO `notification_details` (`id`, `notification_id`, `user_id`, `status`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `order_meals`
+--
+
+CREATE TABLE `order_meals` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `token_no` int(11) NOT NULL,
+  `lunch` int(11) NOT NULL,
+  `lunch_amount` int(11) NOT NULL,
+  `dinner` int(11) NOT NULL,
+  `dinner_amount` int(11) NOT NULL,
+  `total_meal` int(11) NOT NULL,
+  `total_amount` int(11) NOT NULL,
+  `meal_given_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `order_meals`
+--
+
+INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`, `dinner`, `dinner_amount`, `total_meal`, `total_amount`, `meal_given_date`, `created_at`, `updated_at`) VALUES
+(8, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-18', '2022-01-17 16:56:49', '2022-01-17 16:56:49');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `personal_access_tokens`
 --
 
@@ -175,6 +227,7 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `token_no` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -191,11 +244,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `username`, `email`, `phone`, `role`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
-(1, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
-(3, 'Md Anwar Hossain', 'anwar1234', 'user@gmail.com', '01795700838', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
-(4, 'Md Anwar Hossain', 'anwar1234', 'user2@gmail.com', '01795700837', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
-(5, 'Md Anwar Hossain', 'anwar12', 'user3@gmail.com', '01795700835', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10');
+INSERT INTO `users` (`id`, `token_no`, `name`, `username`, `email`, `phone`, `role`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
+(1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
+(3, 121245, 'Md Anwar Hossain', 'anwar1234', 'user@gmail.com', '01795700838', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
+(4, 142782, 'Md Anwar Hossain', 'anwar1234', 'user2@gmail.com', '01795700837', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
+(5, 475214, 'Md Anwar Hossain', 'anwar12', 'user3@gmail.com', '01795700835', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10');
 
 --
 -- Indexes for dumped tables
@@ -214,6 +267,12 @@ ALTER TABLE `email_otp_verification`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `meal_rates`
+--
+ALTER TABLE `meal_rates`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -229,6 +288,12 @@ ALTER TABLE `notifications`
 -- Indexes for table `notification_details`
 --
 ALTER TABLE `notification_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_meals`
+--
+ALTER TABLE `order_meals`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -264,10 +329,16 @@ ALTER TABLE `email_otp_verification`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
+-- AUTO_INCREMENT for table `meal_rates`
+--
+ALTER TABLE `meal_rates`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -280,6 +351,12 @@ ALTER TABLE `notifications`
 --
 ALTER TABLE `notification_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `order_meals`
+--
+ALTER TABLE `order_meals`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
