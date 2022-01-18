@@ -98,4 +98,11 @@ class OrderMealController extends Controller
         $result   = OrderMeal::find($order_id)->delete();
         return $result;
     }
+    
+    public function RestoreTodayOrderedMeal(Request $req)
+    {
+        $order_id = $req->order_id;
+        $result   = OrderMeal::withTrashed()->find($order_id)->restore();
+        return $result;
+    }
 }

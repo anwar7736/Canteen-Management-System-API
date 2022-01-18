@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 17, 2022 at 06:32 PM
+-- Generation Time: Jan 18, 2022 at 06:45 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -117,7 +117,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2022_01_15_185710_create_notifications_table', 4),
 (6, '2022_01_15_190301_create_notification_details_table', 4),
 (7, '2022_01_17_153007_create_meal_rates_table', 5),
-(8, '2022_01_17_153112_create_order_meals_table', 5);
+(10, '2022_01_17_153112_create_order_meals_table', 6);
 
 -- --------------------------------------------------------
 
@@ -168,7 +168,7 @@ INSERT INTO `notification_details` (`id`, `notification_id`, `user_id`, `status`
 (2, 4, 1, 'Latest', '2022-01-16', '09:42:59pm'),
 (3, 5, 3, 'Read', '2022-01-16', '09:44:45pm'),
 (4, 5, 4, 'Latest', '2022-01-16', '09:44:45pm'),
-(5, 5, 5, 'Latest', '2022-01-16', '09:44:45pm'),
+(5, 5, 5, 'Read', '2022-01-16', '09:44:45pm'),
 (9, 9, 1, 'Latest', '2022-01-16', '10:04:05pm'),
 (10, 9, 3, 'Read', '2022-01-16', '10:04:05pm'),
 (11, 10, 1, 'Latest', '2022-01-17', '12:28:30am');
@@ -190,6 +190,7 @@ CREATE TABLE `order_meals` (
   `total_meal` int(11) NOT NULL,
   `total_amount` int(11) NOT NULL,
   `meal_given_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -198,8 +199,9 @@ CREATE TABLE `order_meals` (
 -- Dumping data for table `order_meals`
 --
 
-INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`, `dinner`, `dinner_amount`, `total_meal`, `total_amount`, `meal_given_date`, `created_at`, `updated_at`) VALUES
-(8, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-18', '2022-01-17 16:56:49', '2022-01-17 16:56:49');
+INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`, `dinner`, `dinner_amount`, `total_meal`, `total_amount`, `meal_given_date`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(34, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-19', NULL, '2022-01-18 17:40:55', '2022-01-18 11:41:04'),
+(35, 5, 475214, 0, 0, 1, 50, 1, 50, '2022-01-19', NULL, '2022-01-18 17:43:39', '2022-01-18 11:44:18');
 
 -- --------------------------------------------------------
 
@@ -338,7 +340,7 @@ ALTER TABLE `meal_rates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -356,7 +358,7 @@ ALTER TABLE `notification_details`
 -- AUTO_INCREMENT for table `order_meals`
 --
 ALTER TABLE `order_meals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
