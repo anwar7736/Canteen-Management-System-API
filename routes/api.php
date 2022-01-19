@@ -9,6 +9,8 @@ use App\Http\Controllers\DailyMealItemController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\MealRateController;
 use App\Http\Controllers\OrderMealController;
+use App\Http\Controllers\DayWiseMealController;
+use App\Http\Controllers\DashboardController;
 
 //Login
 Route::post('/login', [LoginController::class, 'onLogin']);
@@ -25,7 +27,11 @@ Route::post('/ChangePassword', [PasswordController::class, 'ChangePassword']);
 Route::get('/GetUserProfile/{id}', [ProfileController::class, 'GetUserProfile']);
 Route::post('/UpdateProfile', [ProfileController::class, 'UpdateProfile']);
 
-
+//Dashboard Summary
+Route::get('/CountDashboardSummary/{user_id}', [DashboardController::class, 'CountDashboardSummary']);
+Route::get('/LastFivePaymentDetails/{user_id}', [DashboardController::class, 'LastFivePaymentDetails']);
+Route::get('/LastFiveMonthsStatements/{user_id}', [DashboardController::class, 'LastFiveMonthsStatements']);
+Route::get('/LastSevenDaysMealReport/{user_id}', [DashboardController::class, 'LastSevenDaysMealReport']);
 
 //DayWiseMealItem
 
@@ -42,8 +48,11 @@ Route::post('/ChangeOrderedMeal', [OrderMealController::class, 'ChangeOrderedMea
 Route::get('/DeleteTodayOrderedMeal/{order_id}', [OrderMealController::class, 'DeleteTodayOrderedMeal']);
 Route::get('/RestoreTodayOrderedMeal/{order_id}', [OrderMealController::class, 'RestoreTodayOrderedMeal']);
 
-//Notification
+//DayWiseMealReportByUser
+Route::get('/GetAllMealByUser/{user_id}', [DayWiseMealController::class, 'GetAllMealByUser']);
+Route::post('/GetMealFilterByDate', [DayWiseMealController::class, 'GetMealFilterByDate']);
 
+//Notification
 Route::post('/SendMessage', [NotificationController::class, 'InsertNotification']);
 Route::get('/GetSelfCreatedNotification/{user_id}', [NotificationController::class, 'GetSelfCreatedNotification']);
 Route::get('/GetAdminNotificationByUser/{user_id}', [NotificationController::class, 'GetAdminNotificationByUser']);
