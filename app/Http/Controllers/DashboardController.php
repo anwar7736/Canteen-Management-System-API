@@ -32,20 +32,20 @@ class DashboardController extends Controller
 
         $total_sending_message = Notification::where('author_id', $user_id)->count();
 
-        return [
-            "Meal Rate " => $meal_rate,
-            "Lunch  " => $total_lunch, 
+        return array(
+            "Meal_Rate" => $meal_rate,
+            "Lunch" => $total_lunch, 
             "Dinner" => $total_dinner, 
-            "Total Meal  " => $total_meal,
-            "Total Cost  " => $total_cost,
-            "Total Payment  " => "0",
-            "Total Due  " => "0",
-            "Total Working Day " => $total_working_day,
-            "Remaining Working Day " => $Remaining_working_day,
-            "Unread Notification " => $unread_notification,
-            "Total Sending Message " => $total_sending_message,
+            "Total_Meal" => $total_meal,
+            "Total_Cost" => $total_cost,
+            "Total_Payment" => "0",
+            "Total_Due" => "0",
+            "Total_Working_Day" => $total_working_day,
+            "Remaining_Working_Day" => $Remaining_working_day,
+            "Unread_Notification" => $unread_notification,
+            "Total_Sending_Message" => $total_sending_message,
         
-        ];
+        );
     }
 
     public function LastFivePaymentDetails(Request $req)
