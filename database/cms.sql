@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2022 at 06:45 PM
+-- Generation Time: Jan 22, 2022 at 06:13 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -117,7 +117,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2022_01_15_185710_create_notifications_table', 4),
 (6, '2022_01_15_190301_create_notification_details_table', 4),
 (7, '2022_01_17_153007_create_meal_rates_table', 5),
-(10, '2022_01_17_153112_create_order_meals_table', 6);
+(10, '2022_01_17_153112_create_order_meals_table', 6),
+(12, '2022_01_22_150933_create_orders_table', 7);
 
 -- --------------------------------------------------------
 
@@ -176,6 +177,34 @@ INSERT INTO `notification_details` (`id`, `notification_id`, `user_id`, `status`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` double(8,2) NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `transaction_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `currency` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payment_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `name`, `token_no`, `email`, `phone`, `amount`, `address`, `transaction_id`, `status`, `currency`, `payment_date`, `payment_time`) VALUES
+(19, 'Md Anwar Hossain', '123456', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '61ec3adc772b4', 'Processing', 'BDT', '2022-01-22', '11:11:56pm');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `order_meals`
 --
 
@@ -201,7 +230,10 @@ CREATE TABLE `order_meals` (
 
 INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`, `dinner`, `dinner_amount`, `total_meal`, `total_amount`, `meal_given_date`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (34, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-19', NULL, '2022-01-18 17:40:55', '2022-01-18 11:41:04'),
-(35, 5, 475214, 0, 0, 1, 50, 1, 50, '2022-01-19', NULL, '2022-01-18 17:43:39', '2022-01-18 11:44:18');
+(35, 5, 475214, 0, 0, 1, 50, 1, 50, '2022-01-19', NULL, '2022-01-18 17:43:39', '2022-01-18 11:44:18'),
+(36, 5, 475214, 1, 60, 1, 50, 2, 110, '2022-01-20', NULL, '2022-01-19 14:31:14', '2022-01-19 08:31:48'),
+(37, 5, 475214, 1, 60, 1, 50, 2, 110, '2022-01-21', NULL, '2022-01-20 14:48:41', '2022-01-20 08:49:53'),
+(38, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-21', NULL, '2022-01-20 16:10:17', '2022-01-20 16:10:17');
 
 -- --------------------------------------------------------
 
@@ -250,7 +282,7 @@ INSERT INTO `users` (`id`, `token_no`, `name`, `username`, `email`, `phone`, `ro
 (1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
 (3, 121245, 'Md Anwar Hossain', 'anwar1234', 'user@gmail.com', '01795700838', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
 (4, 142782, 'Md Anwar Hossain', 'anwar1234', 'user2@gmail.com', '01795700837', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
-(5, 475214, 'Md Anwar Hossain', 'anwar12', 'user3@gmail.com', '01795700835', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10');
+(5, 475214, 'Md Anwar Hossain', 'anwar12', 'user3@gmail.com', '01795700835', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-19 09:17:27');
 
 --
 -- Indexes for dumped tables
@@ -290,6 +322,12 @@ ALTER TABLE `notifications`
 -- Indexes for table `notification_details`
 --
 ALTER TABLE `notification_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -340,7 +378,7 @@ ALTER TABLE `meal_rates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -355,10 +393,16 @@ ALTER TABLE `notification_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
 -- AUTO_INCREMENT for table `order_meals`
 --
 ALTER TABLE `order_meals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

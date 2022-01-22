@@ -44,6 +44,10 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+        'access_payment' => [
+            \App\Http\Middleware\PaymentAccessMiddleware::class,
+        ]
     ];
 
     /**
