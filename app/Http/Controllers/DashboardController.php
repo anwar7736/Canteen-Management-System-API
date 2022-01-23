@@ -23,6 +23,8 @@ class DashboardController extends Controller
         $total_meal = $total_lunch + $total_dinner;
         $total_cost = OrderMeal::where('user_id', $user_id)->sum('total_amount');
         $total_working_day = date('d');
+        $first_day = date('Y-m-d', strtotime('first day of this month'));
+        $last_day = date('Y-m-d', strtotime('last day of this month'));
         $month_last_date = date('d', strtotime('last day of this month'));
         $Remaining_working_day =  $month_last_date -  $total_working_day;
         $unread_notification = NotificationDetail::where('user_id', $user_id)
@@ -32,13 +34,18 @@ class DashboardController extends Controller
 
         $total_sending_message = Notification::where('author_id', $user_id)->count();
 
+        $user = User::where('id', $user_id)->first();
+        $total_payment = Payment::where('token_no', $user->token_no)
+                                ->whereBetween('payment_date', [$first_day, $last_day])
+                                ->sum('amount');
+
         return array(
             "Meal_Rate" => $meal_rate,
             "Lunch" => $total_lunch, 
             "Dinner" => $total_dinner, 
             "Total_Meal" => $total_meal,
             "Total_Cost" => $total_cost,
-            "Total_Payment" => "0",
+            "Total_Payment" => $total_payment,
             "Total_Due" => "0",
             "Total_Working_Day" => $total_working_day,
             "Remaining_Working_Day" => $Remaining_working_day,
@@ -50,8 +57,8 @@ class DashboardController extends Controller
 
     public function LastFivePaymentDetails(Request $req)
     {
-        $user_id = $req->user_id;
-        $payments = Payment::where('user_id', $user_id)
+        $token_no = $req->token_no;
+        $payments = Payment::where('token_no', $token_no)
                             ->orderBy('id', 'desc')
                             ->limit(5)
                             ->get();

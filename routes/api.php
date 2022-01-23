@@ -11,6 +11,7 @@ use App\Http\Controllers\MealRateController;
 use App\Http\Controllers\OrderMealController;
 use App\Http\Controllers\DayWiseMealController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentDetailsController;
 
 //Login
 Route::post('/login', [LoginController::class, 'onLogin']);
@@ -29,13 +30,17 @@ Route::post('/UpdateProfile', [ProfileController::class, 'UpdateProfile']);
 
 //Dashboard Summary
 Route::get('/CountDashboardSummary/{user_id}', [DashboardController::class, 'CountDashboardSummary']);
-Route::get('/LastFivePaymentDetails/{user_id}', [DashboardController::class, 'LastFivePaymentDetails']);
+Route::get('/LastFivePaymentDetails/{token_no}', [DashboardController::class, 'LastFivePaymentDetails']);
 Route::get('/LastFiveMonthsStatements/{user_id}', [DashboardController::class, 'LastFiveMonthsStatements']);
 Route::get('/LastSevenDaysMealReport/{user_id}', [DashboardController::class, 'LastSevenDaysMealReport']);
 
 //DayWiseMealItem
 
 Route::get('/GetDailyMealItem', [DailyMealItemController::class, 'GetDayWiseMealItem']);
+
+//Payment Summary
+Route::get('/PaymentDetailsByUser/{token_no}', [PaymentDetailsController::class, 'PaymentDetailsByUser']);
+Route::post('/PaymentDetailsFilterByDate', [PaymentDetailsController::class, 'PaymentDetailsFilterByDate']);
 
 //Meal Rate
 Route::get('/GetMealRate', [MealRateController::class, 'GetMealRate']);
