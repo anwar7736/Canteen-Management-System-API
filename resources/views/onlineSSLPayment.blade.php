@@ -110,6 +110,8 @@
                 </div>
                 <hr class="mb-4">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout (Hosted)</button>
+                <br/>
+                <a class="text-center btn-block" href="http://localhost:3000">Back To Home</a>
             </form>
         </div>
     </div>

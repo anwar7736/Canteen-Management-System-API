@@ -15,10 +15,12 @@ class ProfileController extends Controller
         return   array(
             'name' => $userInfo->name,
             'username' => $userInfo->username,
+            'token_no' => $userInfo->token_no,
             'email' => $userInfo->email,
             'phone' => $userInfo->phone,
             'photo' => $userInfo->photo,
             'address' => $userInfo->address,
+            'reg_date' => date("d-m-Y", strtotime($userInfo->created_at)),
         );
 	}
 

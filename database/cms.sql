@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 23, 2022 at 05:36 PM
+-- Generation Time: Jan 24, 2022 at 05:39 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -117,8 +117,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2022_01_15_185710_create_notifications_table', 4),
 (6, '2022_01_15_190301_create_notification_details_table', 4),
 (7, '2022_01_17_153007_create_meal_rates_table', 5),
-(10, '2022_01_17_153112_create_order_meals_table', 6),
-(13, '2022_01_22_150933_create_payments_table', 7);
+(13, '2022_01_22_150933_create_payments_table', 7),
+(16, '2022_01_17_153112_create_order_meals_table', 8);
 
 -- --------------------------------------------------------
 
@@ -200,13 +200,7 @@ CREATE TABLE `order_meals` (
 --
 
 INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`, `dinner`, `dinner_amount`, `total_meal`, `total_amount`, `meal_given_date`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(34, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-19', NULL, '2022-01-18 17:40:55', '2022-01-18 11:41:04'),
-(35, 5, 475214, 0, 0, 1, 50, 1, 50, '2022-01-19', NULL, '2022-01-18 17:43:39', '2022-01-18 11:44:18'),
-(36, 5, 475214, 1, 60, 1, 50, 2, 110, '2022-01-20', NULL, '2022-01-19 14:31:14', '2022-01-19 08:31:48'),
-(37, 5, 475214, 1, 60, 1, 50, 2, 110, '2022-01-21', NULL, '2022-01-20 14:48:41', '2022-01-20 08:49:53'),
-(38, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-21', NULL, '2022-01-20 16:10:17', '2022-01-20 16:10:17'),
-(39, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-24', '2022-01-23 10:28:59', '2022-01-23 15:05:37', '2022-01-23 10:28:59'),
-(40, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-24', NULL, '2022-01-23 16:31:46', '2022-01-23 16:31:46');
+(1, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-25', NULL, '2022-01-24 09:30:00', '2022-01-24 09:30:00');
 
 -- --------------------------------------------------------
 
@@ -283,7 +277,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `token_no`, `name`, `username`, `email`, `phone`, `role`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
 (1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
-(3, 121245, 'Md Anwar Hossain', 'anwar1234', 'user123@gmail.com', '01795700838', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-23 10:22:58'),
+(3, 121245, 'Md Anwar Hossain', 'anwar1234', 'user123@gmail.com', '01795700838', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-24 10:30:46'),
 (4, 142782, 'Md Anwar Hossain', 'anwar1234', 'user2@gmail.com', '01795700837', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
 (5, 475214, 'Md Anwar Hossain', 'anwar12', 'user3@gmail.com', '01795700835', 'user', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-19 09:17:27');
 
@@ -381,7 +375,7 @@ ALTER TABLE `meal_rates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -399,7 +393,7 @@ ALTER TABLE `notification_details`
 -- AUTO_INCREMENT for table `order_meals`
 --
 ALTER TABLE `order_meals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `payments`
