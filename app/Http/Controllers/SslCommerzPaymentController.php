@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
+use App\Models\MonthlyStatement;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -81,6 +82,36 @@ class SslCommerzPaymentController extends Controller
                 'payment_date' => date('Y-m-d'),
                 'payment_time' => date('h:i:sa'),
             ]);
+
+            if($update_product)
+            {
+                $year = date('Y');
+                $months = ["January", "February", "March", 
+                "April", "May", "June", 
+                "July", "August", "September", 
+                "October", "November", "December"];
+                $month = $months[date('m')-1];
+
+                $previous_data = MonthlyStatement::where([
+                    'year'=>$year, 
+                    'month'=>$month,
+                    'token_no'=>$post_data['cus_token']
+                    ])->first(); 
+
+                $total_cost = $previous_data->total_cost;
+                $old_total_payment = $previous_data->total_payment;
+                $last_total_payment = $old_total_payment + $post_data['total_amount'];
+                $give_take = $total_cost - $last_total_payment;
+
+                $updated = MonthlyStatement::where([
+                        'year'=>$year, 
+                        'month'=>$month,
+                        'token_no'=>$post_data['cus_token']
+                    ])->update([
+                        'total_payment'=>$last_total_payment, 
+                        'give_take'=>$give_take,
+                    ]); 
+            }
 
         $sslc = new SslCommerzNotification();
         # initiate(Transaction Data , false: Redirect to SSLCOMMERZ gateway/ true: Show all the Payement gateway here )

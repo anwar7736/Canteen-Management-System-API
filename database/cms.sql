@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2022 at 05:39 PM
+-- Generation Time: Jan 25, 2022 at 05:57 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -118,7 +118,39 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2022_01_15_190301_create_notification_details_table', 4),
 (7, '2022_01_17_153007_create_meal_rates_table', 5),
 (13, '2022_01_22_150933_create_payments_table', 7),
-(16, '2022_01_17_153112_create_order_meals_table', 8);
+(16, '2022_01_17_153112_create_order_meals_table', 8),
+(17, '2022_01_25_142927_create_monthly_statements_table', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `monthly_statements`
+--
+
+CREATE TABLE `monthly_statements` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `year` int(11) NOT NULL,
+  `month` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token_no` int(11) NOT NULL,
+  `total_lunch` int(11) NOT NULL,
+  `lunch_cost` int(11) NOT NULL,
+  `total_dinner` int(11) NOT NULL,
+  `dinner_cost` int(11) NOT NULL,
+  `total_meal` int(11) NOT NULL,
+  `total_cost` int(11) NOT NULL,
+  `total_payment` int(11) NOT NULL,
+  `give_take` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `monthly_statements`
+--
+
+INSERT INTO `monthly_statements` (`id`, `year`, `month`, `token_no`, `total_lunch`, `lunch_cost`, `total_dinner`, `dinner_cost`, `total_meal`, `total_cost`, `total_payment`, `give_take`, `created_at`, `updated_at`) VALUES
+(5, 2022, 'January', 121245, 5, 300, 5, 250, 10, 550, 560, -10, NULL, NULL),
+(6, 2022, 'January', 475214, 2, 120, 2, 100, 4, 220, 0, 220, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -200,7 +232,10 @@ CREATE TABLE `order_meals` (
 --
 
 INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`, `dinner`, `dinner_amount`, `total_meal`, `total_amount`, `meal_given_date`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-25', NULL, '2022-01-24 09:30:00', '2022-01-24 09:30:00');
+(18, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-24', NULL, '2022-01-25 16:24:44', '2022-01-25 16:24:44'),
+(20, 3, 121245, 2, 120, 2, 100, 4, 220, '2022-01-25', NULL, '2022-01-25 16:34:36', '2022-01-25 10:35:10'),
+(21, 5, 475214, 2, 120, 2, 100, 4, 220, '2022-01-26', NULL, '2022-01-25 16:36:19', '2022-01-25 10:36:32'),
+(22, 3, 121245, 2, 120, 2, 100, 4, 220, '2022-01-26', NULL, '2022-01-25 16:53:19', '2022-01-25 16:53:19');
 
 -- --------------------------------------------------------
 
@@ -230,7 +265,9 @@ CREATE TABLE `payments` (
 INSERT INTO `payments` (`id`, `name`, `token_no`, `email`, `phone`, `amount`, `address`, `transaction_id`, `status`, `currency`, `payment_date`, `payment_time`) VALUES
 (2, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '61ed6e4de4448', 'Processing', 'BDT', '2022-01-23', '09:03:41pm'),
 (3, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '16ed6e45e4504', 'Processing', 'BDT', '2022-01-24', '09:19:41pm'),
-(4, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 200.00, 'Polashbari, Ashulia, Dhaka', '61ed77db3a6a1', 'Processing', 'BDT', '2022-01-23', '09:44:27pm');
+(4, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 200.00, 'Polashbari, Ashulia, Dhaka', '61ed77db3a6a1', 'Processing', 'BDT', '2022-01-23', '09:44:27pm'),
+(5, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 149.00, 'Polashbari, Ashulia, Dhaka', '61f02b3308fdf', 'Processing', 'BDT', '2022-01-25', '10:54:11pm'),
+(6, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 10.00, 'Polashbari, Ashulia, Dhaka', '61f02b65634b8', 'Processing', 'BDT', '2022-01-25', '10:55:01pm');
 
 -- --------------------------------------------------------
 
@@ -310,6 +347,12 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `monthly_statements`
+--
+ALTER TABLE `monthly_statements`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `notifications`
 --
 ALTER TABLE `notifications`
@@ -375,7 +418,13 @@ ALTER TABLE `meal_rates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `monthly_statements`
+--
+ALTER TABLE `monthly_statements`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -393,13 +442,13 @@ ALTER TABLE `notification_details`
 -- AUTO_INCREMENT for table `order_meals`
 --
 ALTER TABLE `order_meals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

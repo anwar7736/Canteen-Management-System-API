@@ -17,14 +17,21 @@ class DashboardController extends Controller
     public function CountDashboardSummary(Request $req)
     {
         $user_id = $req->user_id;
-        $meal_rate = MealRate::select('lunch_rate', 'dinner_rate')->get();
-        $total_lunch = OrderMeal::where('user_id', $user_id)->sum('lunch');
-        $total_dinner = OrderMeal::where('user_id', $user_id)->sum('dinner');
-        $total_meal = $total_lunch + $total_dinner;
-        $total_cost = OrderMeal::where('user_id', $user_id)->sum('total_amount');
-        $total_working_day = date('d');
         $first_day = date('Y-m-d', strtotime('first day of this month'));
         $last_day = date('Y-m-d', strtotime('last day of this month'));
+
+        $meal_rate = MealRate::select('lunch_rate', 'dinner_rate')->get();
+        $total_lunch = OrderMeal::where('user_id', $user_id)
+                            ->whereBetween('meal_given_date', [$first_day, $last_day])
+                            ->sum('lunch');
+        $total_dinner = OrderMeal::where('user_id', $user_id)
+                            ->whereBetween('meal_given_date', [$first_day, $last_day])
+                            ->sum('dinner');
+        $total_meal = $total_lunch + $total_dinner;
+        $total_cost = OrderMeal::where('user_id', $user_id)
+                            ->whereBetween('meal_given_date', [$first_day, $last_day])
+                            ->sum('total_amount');
+        $total_working_day = date('d');
         $month_last_date = date('d', strtotime('last day of this month'));
         $Remaining_working_day =  $month_last_date -  $total_working_day;
         $unread_notification = NotificationDetail::where('user_id', $user_id)

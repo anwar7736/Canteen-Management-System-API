@@ -50,8 +50,8 @@ Route::post('/ChangeMealRate', [MealRateController::class, 'ChangeMealRate']);
 Route::post('/OrderDailyMeal', [OrderMealController::class, 'OrderDailyMeal']);
 Route::get('/GetTodayOrderInfo/{user_id}/{token_no}', [OrderMealController::class, 'GetTodayOrderInfo']);
 Route::post('/ChangeOrderedMeal', [OrderMealController::class, 'ChangeOrderedMeal']);
-Route::get('/DeleteTodayOrderedMeal/{order_id}', [OrderMealController::class, 'DeleteTodayOrderedMeal']);
-Route::get('/RestoreTodayOrderedMeal/{order_id}', [OrderMealController::class, 'RestoreTodayOrderedMeal']);
+Route::get('/DeleteTodayOrderedMeal/{order_id}/{token_no}', [OrderMealController::class, 'DeleteTodayOrderedMeal']);
+Route::get('/RestoreTodayOrderedMeal/{order_id}/{token_no}', [OrderMealController::class, 'RestoreTodayOrderedMeal']);
 
 //DayWiseMealReportByUser
 Route::get('/GetAllMealByUser/{user_id}', [DayWiseMealController::class, 'GetAllMealByUser']);
