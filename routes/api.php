@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderMealController;
 use App\Http\Controllers\DayWiseMealController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentDetailsController;
+use App\Http\Controllers\MonthlyStatementController;
 
 //Login
 Route::post('/login', [LoginController::class, 'onLogin']);
@@ -31,7 +32,7 @@ Route::post('/UpdateProfile', [ProfileController::class, 'UpdateProfile']);
 //Dashboard Summary
 Route::get('/CountDashboardSummary/{user_id}', [DashboardController::class, 'CountDashboardSummary']);
 Route::get('/LastFivePaymentDetails/{token_no}', [DashboardController::class, 'LastFivePaymentDetails']);
-Route::get('/LastFiveMonthsStatements/{user_id}', [DashboardController::class, 'LastFiveMonthsStatements']);
+Route::get('/LastFiveMonthsStatements/{token_no}', [DashboardController::class, 'LastFiveMonthsStatements']);
 Route::get('/LastSevenDaysMealReport/{user_id}', [DashboardController::class, 'LastSevenDaysMealReport']);
 
 //DayWiseMealItem
@@ -52,6 +53,11 @@ Route::get('/GetTodayOrderInfo/{user_id}/{token_no}', [OrderMealController::clas
 Route::post('/ChangeOrderedMeal', [OrderMealController::class, 'ChangeOrderedMeal']);
 Route::get('/DeleteTodayOrderedMeal/{order_id}/{token_no}', [OrderMealController::class, 'DeleteTodayOrderedMeal']);
 Route::get('/RestoreTodayOrderedMeal/{order_id}/{token_no}', [OrderMealController::class, 'RestoreTodayOrderedMeal']);
+
+//MonthlyStatement
+Route::get('/GetYearsAndMonths', [MonthlyStatementController::class, 'GetYearsAndMonths']);
+Route::get('/GetAllMonthlyStatement/{token_no}', [MonthlyStatementController::class, 'GetAllMonthlyStatement']);
+Route::post('/GetMonthlyStatementByKey', [MonthlyStatementController::class, 'GetMonthlyStatementByKey']);
 
 //DayWiseMealReportByUser
 Route::get('/GetAllMealByUser/{user_id}', [DayWiseMealController::class, 'GetAllMealByUser']);

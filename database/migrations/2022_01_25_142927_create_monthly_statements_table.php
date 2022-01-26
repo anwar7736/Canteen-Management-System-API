@@ -24,8 +24,9 @@ class CreateMonthlyStatementsTable extends Migration
             $table->integer('dinner_cost');
             $table->integer('total_meal');
             $table->integer('total_cost');
-            $table->integer('total_payment');
-            $table->integer('give_take');
+            $table->double('total_payment', 8, 2);
+            $table->double('give', 8, 2);
+            $table->double('take', 8, 2);
             $table->timestamps();
         });
     }

@@ -74,8 +74,8 @@ class DashboardController extends Controller
     
     public function LastFiveMonthsStatements(Request $req)
     {
-        $user_id = $req->user_id;
-        $statements = MonthlyStatement::where('user_id', $user_id)
+        $token_no = $req->token_no;
+        $statements = MonthlyStatement::where('token_no', $token_no)
                             ->orderBy('id', 'desc')
                             ->limit(5)
                             ->get();

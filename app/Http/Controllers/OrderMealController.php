@@ -32,7 +32,22 @@ class OrderMealController extends Controller
         $total_payment = Payment::where('token_no', $token_no)
                                 ->whereBetween('payment_date', [$first_day, $last_day])
                                 ->sum('amount');
+
         $give_take = $total_cost - $total_payment;
+
+        $give = '';
+        $take = '';
+
+        if($give_take < 0)
+        {
+            $take = abs($give_take);
+            $give = 0;
+        }
+        else {
+            $take = 0;
+            $give = $give_take;
+        }
+
         $year = date('Y');
         $months = ["January", "February", "March", 
         "April", "May", "June", 
@@ -47,7 +62,8 @@ class OrderMealController extends Controller
             "total_meal" => $total_meal,
             "total_cost" => $total_cost,
             "total_payment" => $total_payment,
-            "give_take" => $give_take,
+            "give" => $give,
+            "take" => $take,
             "year"  =>  $year,
             "month" => $month,
         );
@@ -119,7 +135,8 @@ class OrderMealController extends Controller
                         'total_meal' => $summary['total_meal'],
                         'total_cost' => $summary['total_cost'],
                         'total_payment' => $summary['total_payment'],
-                        'give_take' => $summary['give_take'],
+                        'give' => $summary['give'],
+                        'take' => $summary['take'],
                 ]);
 
                 }   
@@ -136,7 +153,8 @@ class OrderMealController extends Controller
                                         'total_meal' => $summary['total_meal'],
                                         'total_cost' => $summary['total_cost'],
                                         'total_payment' => $summary['total_payment'],
-                                        'give_take' => $summary['give_take'],
+                                        'give' => $summary['give'],
+                                        'take' => $summary['take'],
                                 ]);
 
                 }
@@ -197,7 +215,8 @@ class OrderMealController extends Controller
                 'total_meal' => $summary['total_meal'],
                 'total_cost' => $summary['total_cost'],
                 'total_payment' => $summary['total_payment'],
-                'give_take' => $summary['give_take'],
+                'give' => $summary['give'],
+                'take' => $summary['take'],
         ]);
             return $result;
         }
@@ -223,7 +242,8 @@ class OrderMealController extends Controller
                 'total_meal' => $summary['total_meal'],
                 'total_cost' => $summary['total_cost'],
                 'total_payment' => $summary['total_payment'],
-                'give_take' => $summary['give_take'],
+                'give' => $summary['give'],
+                'take' => $summary['take'],
         ]);
             return $result;
         }
@@ -250,7 +270,8 @@ class OrderMealController extends Controller
                 'total_meal' => $summary['total_meal'],
                 'total_cost' => $summary['total_cost'],
                 'total_payment' => $summary['total_payment'],
-                'give_take' => $summary['give_take'],
+                'give' => $summary['give'],
+                'take' => $summary['take'],
         ]);
             return $result;
         }

@@ -103,13 +103,26 @@ class SslCommerzPaymentController extends Controller
                 $last_total_payment = $old_total_payment + $post_data['total_amount'];
                 $give_take = $total_cost - $last_total_payment;
 
+                $give = '';
+                $take = '';
+        
+                if($give_take < 0)
+                {
+                    $take = abs($give_take);
+                    $give = 0;
+                }
+                else {
+                    $take = 0;
+                    $give = $give_take;
+                }   
                 $updated = MonthlyStatement::where([
                         'year'=>$year, 
                         'month'=>$month,
                         'token_no'=>$post_data['cus_token']
                     ])->update([
                         'total_payment'=>$last_total_payment, 
-                        'give_take'=>$give_take,
+                        'give'=>$give,
+                        'take'=>$take,
                     ]); 
             }
 
@@ -250,7 +263,7 @@ class SslCommerzPaymentController extends Controller
         return ("<script>
         
                 setTimeout(()=>{
-                    window.location.href='http://localhost:3000'
+                    window.location.href='http://localhost:3000/payment_summary'
                 },3000);
         
         </script>");
