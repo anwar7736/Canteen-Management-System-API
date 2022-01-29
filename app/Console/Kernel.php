@@ -7,22 +7,32 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
-     */
+
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        //Daily order reminder
+        $schedule->command('daily:order')
+                 ->timezone('Asia/Dhaka')
+                 ->dailyAt('22:00');
+
+        //Some payment reminder
+        $schedule->command('some:payment')
+                 ->timezone('Asia/Dhaka')
+                 ->monthlyOn(11, '08:00');
+                 
+        //User inactive
+        $schedule->command('user:inactive')
+                ->timezone('Asia/Dhaka')
+                ->monthlyOn(16, '24:00');
+
+       //Monthly Statement
+        $schedule->command('monthly:report')
+                ->timezone('Asia/Dhaka')
+                ->lastDayOfMonth('22:00');
+
     }
 
-    /**
-     * Register the commands for the application.
-     *
-     * @return void
-     */
+
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');
