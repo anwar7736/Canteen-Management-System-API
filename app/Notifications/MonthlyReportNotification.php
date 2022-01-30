@@ -10,48 +10,71 @@ use Illuminate\Notifications\Notification;
 class MonthlyReportNotification extends Notification implements ShouldQueue
 {
     use Queueable;
+    
+    public $name = '';    
+    public $month = '';
+    public $year = '';
+    public $total_lunch = '';
+    public $total_lunch_cost = '';
+    public $total_dinner = '';
+    public $total_dinner_cost = '';
+    public $total_meal = '';
+    public $total_meal_cost = '';
+    public $total_payment = '';
+    public $total_due = '';
 
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
+
+    public function __construct(
+                                $name, $month, $year, 
+                                $total_lunch, $total_lunch_cost, 
+                                $total_dinner, $total_dinner_cost,
+                                $total_meal, $total_meal_cost, 
+                                $total_payment, $total_due
+                                )
     {
-        //
+            $this->name = $name;            
+            $this->month = $month;
+            $this->year = $year;
+            $this->total_lunch = $total_lunch;
+            $this->total_lunch_cost = $total_lunch_cost;
+            $this->total_dinner = $total_dinner;
+            $this->total_dinner_cost = $total_dinner_cost;
+            $this->total_meal = $total_meal;
+            $this->total_meal_cost = $total_meal_cost;
+            $this->total_payment  = $total_payment;
+            $this->total_due = $total_due;
+
     }
 
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function via($notifiable)
     {
+
         return ['mail'];
     }
 
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        $name = $this->name;         
+        $month = $this->month;
+        $year = $this->year;
+        $total_lunch = $this->total_lunch;
+        $total_lunch_cost = $this->total_lunch_cost;
+        $total_dinner = $this->total_dinner;
+        $total_dinner_cost = $this->total_dinner_cost;
+        $total_meal = $this->total_meal;
+        $total_meal_cost  = $this->total_meal_cost;
+        $total_payment  = $this->total_payment;
+        $total_due = $this->total_due;
+
+        return (new MailMessage)->view('notifications.monthly_statement', compact(
+            'name', 'month', 'year',
+            'total_lunch', 'total_lunch_cost',
+            'total_dinner', 'total_dinner_cost',
+            'total_meal', 'total_meal_cost',
+            'total_payment', 'total_due'
+        ));
     }
 
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
     public function toArray($notifiable)
     {
         return [

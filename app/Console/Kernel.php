@@ -11,24 +11,24 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //Daily order reminder
-        $schedule->command('daily:order')
-                 ->timezone('Asia/Dhaka')
-                 ->dailyAt('22:00');
+        // $schedule->command('daily:order')
+        //          ->timezone('Asia/Dhaka')
+        //          ->dailyAt('22:00');
 
-        //Some payment reminder
-        $schedule->command('some:payment')
-                 ->timezone('Asia/Dhaka')
-                 ->monthlyOn(11, '08:00');
+        // //Some payment reminder
+        // $schedule->command('some:payment')
+        //          ->timezone('Asia/Dhaka')
+        //          ->monthlyOn(11, '08:00');
                  
-        //User inactive
-        $schedule->command('user:inactive')
-                ->timezone('Asia/Dhaka')
-                ->monthlyOn(16, '24:00');
+        // //User inactive
+        // $schedule->command('user:inactive')
+        //         ->timezone('Asia/Dhaka')
+        //         ->monthlyOn(16, '24:00');
 
        //Monthly Statement
-        $schedule->command('monthly:report')
-                ->timezone('Asia/Dhaka')
-                ->lastDayOfMonth('22:00');
+        // $schedule->command('monthly:report')
+        //         ->timezone('Asia/Dhaka')
+        //         ->lastDayOfMonth('22:30');
 
     }
 
