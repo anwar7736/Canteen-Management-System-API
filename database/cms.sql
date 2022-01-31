@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2022 at 06:39 PM
+-- Generation Time: Jan 31, 2022 at 05:55 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -69,7 +69,7 @@ CREATE TABLE `email_otp_verification` (
 --
 
 INSERT INTO `email_otp_verification` (`id`, `email`, `otp`, `time`, `date`) VALUES
-(41, 'anwarhossain7736@gmail.com', '494080', '12:11:21am', '2022-01-12');
+(53, 'mdshahjahansheikh1995@gmail.com', '255134', '09:29:31pm', '2022-01-31');
 
 -- --------------------------------------------------------
 
@@ -168,7 +168,7 @@ CREATE TABLE `monthly_statements` (
 
 INSERT INTO `monthly_statements` (`id`, `year`, `month`, `token_no`, `total_lunch`, `lunch_cost`, `total_dinner`, `dinner_cost`, `total_meal`, `total_cost`, `total_payment`, `give`, `take`, `created_at`, `updated_at`) VALUES
 (1, 2022, 'January', 121245, 7, 420, 7, 350, 14, 770, 1860.00, 0.00, 1090.00, NULL, NULL),
-(2, 2022, 'January', 475214, 2, 120, 2, 100, 4, 220, 220.00, 0.00, 0.00, NULL, NULL),
+(2, 2022, 'January', 475214, 2, 120, 2, 100, 4, 220, 320.50, 0.00, 100.50, NULL, NULL),
 (3, 2022, 'January', 142782, 2, 120, 2, 100, 4, 220, 220.00, 0.00, 0.00, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -195,7 +195,8 @@ INSERT INTO `notifications` (`id`, `author_id`, `author_name`, `msg_title`, `msg
 (4, 3, 'Anwar', 'Hello', 'Hello there, how are you?', '2022-01-16', '09:42:59pm'),
 (5, 1, 'Md Sujon Mollah', 'Check you mail', 'Dear All, Please check your mail', '2022-01-16', '09:44:45pm'),
 (9, 3, 'Anwar', 'Request for guest meal', 'Dear Admin,\r\nI want to  add some guest meal for 17-01-22', '2022-01-16', '10:04:05pm'),
-(10, 3, 'Md Anwar Hossain', 'Good Night', 'Good Night', '2022-01-17', '12:28:30am');
+(10, 3, 'Md Anwar Hossain', 'Good Night', 'Good Night', '2022-01-17', '12:28:30am'),
+(11, 5, 'Good Night', 'Good Night', 'Hey there,\r\nHow are you?', '2022-01-31', '10:02:02pm');
 
 -- --------------------------------------------------------
 
@@ -222,7 +223,8 @@ INSERT INTO `notification_details` (`id`, `notification_id`, `user_id`, `status`
 (4, 5, 4, 'Latest', '2022-01-16', '09:44:45pm'),
 (5, 5, 5, 'Read', '2022-01-16', '09:44:45pm'),
 (9, 9, 1, 'Latest', '2022-01-16', '10:04:05pm'),
-(11, 10, 1, 'Latest', '2022-01-17', '12:28:30am');
+(11, 10, 1, 'Latest', '2022-01-17', '12:28:30am'),
+(12, 11, 1, 'Latest', '2022-01-31', '10:02:02pm');
 
 -- --------------------------------------------------------
 
@@ -254,7 +256,8 @@ INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`,
 (24, 3, 121245, 5, 300, 5, 250, 10, 550, '2022-01-26', NULL, '2022-01-26 17:01:12', '2022-01-26 11:01:48'),
 (25, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-27', NULL, '2022-01-26 17:02:55', '2022-01-26 17:02:55'),
 (26, 5, 475214, 2, 120, 2, 100, 4, 220, '2022-01-27', NULL, '2022-01-26 17:05:01', '2022-01-26 17:05:01'),
-(29, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-31', NULL, '2022-01-30 17:39:37', '2022-01-30 17:39:37');
+(29, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-31', NULL, '2022-01-30 17:39:37', '2022-01-30 17:39:37'),
+(31, 5, 475214, 1, 60, 1, 50, 2, 110, '2022-02-01', NULL, '2022-01-31 16:43:08', '2022-01-31 16:43:08');
 
 -- --------------------------------------------------------
 
@@ -289,7 +292,8 @@ INSERT INTO `payments` (`id`, `name`, `token_no`, `email`, `phone`, `amount`, `a
 (6, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 10.00, 'Polashbari, Ashulia, Dhaka', '61f02b65634b8', 'Processing', 'BDT', '2022-01-25', '10:55:01pm'),
 (7, 'Md Anwar Hossain', '475214', 'abc@gmail.com', '01794030592', 220.00, 'Polashbari, Ashulia, Dhaka', '61f17f7f920f3', 'Processing', 'BDT', '2022-01-26', '11:06:07pm'),
 (8, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 100.00, 'Polashbari, Ashulia, Dhaka', '61f17ff85444e', 'Processing', 'BDT', '2022-01-26', '11:08:08pm'),
-(9, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 1200.00, 'Polashbari, Ashulia, Dhaka', '61ddbfb227839', 'Processing', 'BDT', '2022-01-11', '11:34:42pm');
+(9, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 1200.00, 'Polashbari, Ashulia, Dhaka', '61ddbfb227839', 'Processing', 'BDT', '2022-01-11', '11:34:42pm'),
+(10, 'Md Anwar Hossain', '475214', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '61f80af8e7913', 'Processing', 'BDT', '2022-01-31', '10:14:48pm');
 
 -- --------------------------------------------------------
 
@@ -337,9 +341,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `token_no`, `name`, `username`, `email`, `phone`, `role`, `status`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
 (1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
-(3, 121245, 'Md Anwar Khan', 'anwar1234', 'user123@gmail.com', '01795700838', 'user', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-24 10:30:46'),
-(4, 142782, 'Md Sujon Mollah', 'anwar123', 'user2@gmail.com', '01795700837', 'user', 'inactive', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-16 11:38:00'),
-(5, 475214, 'Md Anwar Hossain', 'anwar12', 'user3@gmail.com', '01795700835', 'user', 'inactive', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-16 11:38:00');
+(3, 121245, 'Shara Enterprise', 'anwar1234', 'shara_enterprise@yahoo.com', '01795700838', 'user', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-24 10:30:46'),
+(4, 142782, 'Shara', 'anwar123', 'shara6493@gmail.com', '01795700837', 'user', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-16 10:50:01'),
+(5, 475214, 'Md Shahjahan Sheikh', 'anwar12', 'mdshahjahansheikh1995@gmail.com', '01795700835', 'user', 'active', '$2y$10$Kdk3aCfLjRG5.xwiLMZ7RuhykhJkXoMariZOz9HjroIoj/ZQxSLYm', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/nFbB1qbhCa4BBHoRLIxCq3RJ7HzLRaApHJWu9fcg.jpg', '2022-01-09 09:42:41', '2022-01-16 10:50:01');
 
 --
 -- Indexes for dumped tables
@@ -436,13 +440,13 @@ ALTER TABLE `daily_meal_items`
 -- AUTO_INCREMENT for table `email_otp_verification`
 --
 ALTER TABLE `email_otp_verification`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT for table `meal_rates`
@@ -466,25 +470,25 @@ ALTER TABLE `monthly_statements`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `notification_details`
 --
 ALTER TABLE `notification_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `order_meals`
 --
 ALTER TABLE `order_meals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

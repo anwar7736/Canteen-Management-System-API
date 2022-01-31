@@ -15,10 +15,10 @@ class Kernel extends ConsoleKernel
         //          ->timezone('Asia/Dhaka')
         //          ->dailyAt('22:00');
 
-        // //Some payment reminder
+        //Some payment reminder
         // $schedule->command('some:payment')
         //          ->timezone('Asia/Dhaka')
-        //          ->monthlyOn(11, '08:00');
+        //          ->monthlyOn(11, '80:00');
                  
         // //User inactive
         // $schedule->command('user:inactive')
@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
        //Monthly Statement
         // $schedule->command('monthly:report')
         //         ->timezone('Asia/Dhaka')
-        //         ->lastDayOfMonth('22:30');
+        //         ->lastDayOfMonth('22:00');
 
     }
 
