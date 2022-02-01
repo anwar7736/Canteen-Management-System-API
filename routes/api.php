@@ -14,7 +14,11 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentDetailsController;
 use App\Http\Controllers\MonthlyStatementController;
 
-//Login
+
+//Admin Login
+Route::post('/admin_login', [LoginController::class, 'AdminLogin']);
+
+//User Login
 Route::post('/login', [LoginController::class, 'onLogin']);
 
 //Password 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2022 at 05:55 PM
+-- Generation Time: Feb 01, 2022 at 04:56 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -69,7 +69,9 @@ CREATE TABLE `email_otp_verification` (
 --
 
 INSERT INTO `email_otp_verification` (`id`, `email`, `otp`, `time`, `date`) VALUES
-(53, 'mdshahjahansheikh1995@gmail.com', '255134', '09:29:31pm', '2022-01-31');
+(53, 'mdshahjahansheikh1995@gmail.com', '255134', '09:29:31pm', '2022-01-31'),
+(55, 'anwarhossain7736@gmail.com', '911952', '09:50:45pm', '2022-02-01'),
+(56, 'anwarhossain7736@gmail.com', '751875', '09:56:15pm', '2022-02-01');
 
 -- --------------------------------------------------------
 
@@ -340,7 +342,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `token_no`, `name`, `username`, `email`, `phone`, `role`, `status`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
-(1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-15 13:42:10'),
+(1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', 'active', '$2y$10$iDDDYsU2DyYbtdsb31gYXuKL1ydfDyCZScMBmXQKUfm2iHsgqW5r6', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-02-01 09:55:45'),
 (3, 121245, 'Shara Enterprise', 'anwar1234', 'shara_enterprise@yahoo.com', '01795700838', 'user', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-24 10:30:46'),
 (4, 142782, 'Shara', 'anwar123', 'shara6493@gmail.com', '01795700837', 'user', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/uuJKLlgMW5PY83XDSaePb4zoLr95ygxjq50BbqrT.jpg', '2022-01-09 09:42:41', '2022-01-16 10:50:01'),
 (5, 475214, 'Md Shahjahan Sheikh', 'anwar12', 'mdshahjahansheikh1995@gmail.com', '01795700835', 'user', 'active', '$2y$10$Kdk3aCfLjRG5.xwiLMZ7RuhykhJkXoMariZOz9HjroIoj/ZQxSLYm', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/nFbB1qbhCa4BBHoRLIxCq3RJ7HzLRaApHJWu9fcg.jpg', '2022-01-09 09:42:41', '2022-01-16 10:50:01');
@@ -440,7 +442,7 @@ ALTER TABLE `daily_meal_items`
 -- AUTO_INCREMENT for table `email_otp_verification`
 --
 ALTER TABLE `email_otp_verification`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `jobs`

@@ -30,29 +30,21 @@ class LoginController extends Controller
         else{
             return 0;
         }
-        function AdminLogin(Request $req)
+    }
+        public function AdminLogin(Request $req)
         {
-            if($user_info->role === "admin")
+            $username = $req->username;
+            $password = $req->password;
+            $admin_info = User::where('username', $username)->first();
+            if($admin_info && Hash::check($password, $admin_info->password))
             {
-                $otp = rand(111111,999999);
-                date_default_timezone_set('Asia/Dhaka');
-                $date = date('Y-m-d');
-                $time = date('h:i:sa', strtotime("+5 Minutes"));
-    
-                $result = OTPModel::insert([
-                    'email' => $user_info->email,
-                    'otp' => $otp,
-                    'time' => $time,
-                    'date' => $date
-                ]);
-
-                if($result)
-                {
-                    $data = ['name' => $user_info->name, 'otp'=> $otp];
-                    Mail::to($user_info->email)->send(new AdminVerification($data));
-                    return array('admin', $user_info->email); 
-                }
+                return $admin_info;
+                    
             }
+            else{
+                return 0;
+            }
+
         }
     }
-}
+
