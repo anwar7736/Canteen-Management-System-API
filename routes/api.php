@@ -13,10 +13,18 @@ use App\Http\Controllers\DayWiseMealController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentDetailsController;
 use App\Http\Controllers\MonthlyStatementController;
+use App\Http\Controllers\MemberController;
 
 
 //Admin Login
 Route::post('/admin_login', [LoginController::class, 'AdminLogin']);
+
+//Member
+Route::get('/all_members', [MemberController::class, 'AllMembers']);
+Route::post('/add_member', [MemberController::class, 'AddNewMember']);
+Route::get('/view_member_by_id/{user_id}', [MemberController::class, 'ViewMemberById']);
+Route::post('/edit_member', [MemberController::class, 'EditMember']);
+Route::get('/delete_member/{user_id}', [MemberController::class, 'DeleteMember']);
 
 //User Login
 Route::post('/login', [LoginController::class, 'onLogin']);
