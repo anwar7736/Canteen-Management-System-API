@@ -9,13 +9,21 @@
 <body>
     <span><b>Hi</b></span> <span style="color:gray">{{$data['name']}},</span>
     <p>
-        Welcome to our E-Commerce Application. <br/>Now you are our new registered customer.<br/>
+        Welcome to our Canteen Management System. <br/>Now you are our new registered customer.<br/>
+        <br/>        
+        <h3>Registration Date : {{$data['reg_date']}}<h3>
+        <h3>Your Token No : {{$data['token_no']}}<h3>
+        <h3>Login URL : {{$data['login_url']}}<h3>
+        <h3>Username : {{$data['username']}}<h3>
+        <h3>Password : {{$data['password']}}<h3>
+
         <br/>
+        <hr/>
         Thanks for registering!
         <br/>
         <br/>
         <b style="color:green">Best Regards,</b><br/>
-        E-Commerce Support Team
+        {{env('APP_NAME')}} Support Team
     </p>
 </body>
 </html>
