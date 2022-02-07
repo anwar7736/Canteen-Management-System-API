@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class DailyMealItem extends Model
 {
     protected $table = 'daily_meal_items';
-    public $timestamps = false;
+    // public $timestamps = false;
     use HasFactory;
 }

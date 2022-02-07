@@ -31,6 +31,8 @@ class SslCommerzPaymentController extends Controller
         $post_data['tran_id'] = uniqid(); // tran_id must be unique
 
         # CUSTOMER INFORMATION
+        $post_data['year'] = $request->year;
+        $post_data['month'] = $request->month;
         $post_data['cus_name'] = $request->customer_name;
         $post_data['cus_token'] = $request->customer_token;
         $post_data['cus_email'] = $request->customer_email;
@@ -70,6 +72,8 @@ class SslCommerzPaymentController extends Controller
         $update_product = DB::table('payments')
             ->where('transaction_id', $post_data['tran_id'])
             ->updateOrInsert([
+                'year' => $post_data['year'],
+                'month' => $post_data['month'],
                 'name' => $post_data['cus_name'],
                 'token_no' => $post_data['cus_token'],
                 'email' => $post_data['cus_email'],
@@ -85,12 +89,8 @@ class SslCommerzPaymentController extends Controller
 
             if($update_product)
             {
-                $year = date('Y');
-                $months = ["January", "February", "March", 
-                "April", "May", "June", 
-                "July", "August", "September", 
-                "October", "November", "December"];
-                $month = $months[date('m')-1];
+                $year = $post_data['year'];
+                $month = $post_data['month'];
 
                 $previous_data = MonthlyStatement::where([
                     'year'=>$year, 

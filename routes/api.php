@@ -19,6 +19,16 @@ use App\Http\Controllers\MemberController;
 //Admin Login
 Route::post('/admin_login', [LoginController::class, 'AdminLogin']);
 
+//Payment
+Route::post('/AddPayment', [PaymentDetailsController::class, 'AddPayment']);
+Route::post('/EditPayment', [PaymentDetailsController::class, 'EditPayment']);
+Route::post('/DeletePayment', [PaymentDetailsController::class, 'DeletePayment']);
+Route::get('/GetAllPayments', [PaymentDetailsController::class, 'GetAllPayments']);
+Route::post('/GetAllPaymentByDate', [PaymentDetailsController::class, 'GetAllPaymentByDate']);
+Route::get('/GetPaymentById/{payment_id}', [PaymentDetailsController::class, 'GetPaymentById']);
+Route::get('/PaymentDetailsByUser/{token_no}', [PaymentDetailsController::class, 'PaymentDetailsByUser']);
+Route::post('/PaymentDetailsFilterByDate', [PaymentDetailsController::class, 'PaymentDetailsFilterByDate']);
+
 //Member
 Route::get('/all_members', [MemberController::class, 'AllMembers']);
 Route::post('/add_member', [MemberController::class, 'AddNewMember']);
@@ -50,10 +60,7 @@ Route::get('/LastSevenDaysMealReport/{user_id}', [DashboardController::class, 'L
 //DayWiseMealItem
 
 Route::get('/GetDailyMealItem', [DailyMealItemController::class, 'GetDayWiseMealItem']);
-
-//Payment Summary
-Route::get('/PaymentDetailsByUser/{token_no}', [PaymentDetailsController::class, 'PaymentDetailsByUser']);
-Route::post('/PaymentDetailsFilterByDate', [PaymentDetailsController::class, 'PaymentDetailsFilterByDate']);
+Route::post('/EditDayWiseMealItem', [DailyMealItemController::class, 'EditDayWiseMealItem']);
 
 //Meal Rate
 Route::get('/GetMealRate', [MealRateController::class, 'GetMealRate']);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2022 at 06:30 PM
+-- Generation Time: Feb 07, 2022 at 07:24 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -42,13 +42,13 @@ CREATE TABLE `daily_meal_items` (
 --
 
 INSERT INTO `daily_meal_items` (`id`, `day`, `lunch_item`, `dinner_item`, `created_at`, `updated_at`) VALUES
-(1, 'শনিবার', 'মুরগীর মাংস, সবজি, ডাল', 'বড় মাছ, ভর্তা, ডাল', NULL, NULL),
-(2, 'রবিবার', 'বড় মাছ, সবজি, ডাল', 'ছোট মাছ, ভর্তা, ডাল', NULL, NULL),
-(3, 'সোমবার', 'ডিম, ভর্তা, ডাল', 'বড় মাছ, সবজি, ডাল', NULL, NULL),
-(4, 'মঙ্গলবার', 'মুরগীর মাংস, সবজি, ডাল', 'মলা মাছ ভর্তা, ডাল', NULL, NULL),
-(5, 'বুধবার', 'বড় মাছ, শাক-সবজি, ডাল', 'বড় মাছ, আলু ভর্তা, ডাল', NULL, NULL),
-(6, 'বৃহস্পতিবার', 'ছোট মাছ, ভর্তা, ডাল', 'ভুনা খিচুড়ি, সবজি, ডাল', NULL, NULL),
-(7, 'শুক্রবার', 'গরুর মাংস, সবজি, ডাল', 'ডিম, শাক, ডাল', NULL, NULL);
+(1, 'শনিবার', 'মুরগীর মাংস, সবজি, ডাল, আলু ভর্তা', 'বড় মাছ, শাকসবজি, ডাল', '2022-02-07 15:58:34', '2022-02-07 10:05:13'),
+(2, 'রবিবার', 'বড় মাছ, সবজি, ডাল', 'ছোট মাছ, ভর্তা, ডাল', '2022-02-07 15:58:41', '2022-02-07 15:58:43'),
+(3, 'সোমবার', 'ডিম, ভর্তা, ডাল', 'বড় মাছ, সবজি, ডাল', '2022-02-07 15:58:45', '2022-02-07 15:58:46'),
+(4, 'মঙ্গলবার', 'মুরগীর মাংস, সবজি, ডাল', 'মলা মাছ ভর্তা, ডাল', '2022-02-07 15:58:47', '2022-02-07 15:58:48'),
+(5, 'বুধবার', 'বড় মাছ, শাক-সবজি, ডাল', 'বড় মাছ, আলু ভর্তা, ডাল', '2022-02-07 15:58:49', '2022-02-07 15:58:50'),
+(6, 'বৃহস্পতিবার', 'ছোট মাছ, ভর্তা, ডাল', 'ভুনা খিচুড়ি, সবজি, ডাল', '2022-02-07 15:58:51', '2022-02-07 15:58:52'),
+(7, 'শুক্রবার', 'গরুর মাংস, সবজি, ডাল', 'ডিম, শাক, ডাল', '2022-02-07 15:58:54', '2022-02-07 15:58:55');
 
 -- --------------------------------------------------------
 
@@ -97,6 +97,8 @@ CREATE TABLE `jobs` (
 
 CREATE TABLE `meal_rates` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `lunch_expiry_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dinner_expiry_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lunch_rate` int(11) NOT NULL,
   `dinner_rate` int(11) NOT NULL,
   `total_rate` int(11) NOT NULL,
@@ -108,8 +110,8 @@ CREATE TABLE `meal_rates` (
 -- Dumping data for table `meal_rates`
 --
 
-INSERT INTO `meal_rates` (`id`, `lunch_rate`, `dinner_rate`, `total_rate`, `created_at`, `updated_at`) VALUES
-(1, 60, 50, 110, '2022-01-17 15:59:45', '2022-01-17 16:14:15');
+INSERT INTO `meal_rates` (`id`, `lunch_expiry_time`, `dinner_expiry_time`, `lunch_rate`, `dinner_rate`, `total_rate`, `created_at`, `updated_at`) VALUES
+(1, '3:50', '11:00', 60, 50, 110, '2022-02-07 16:15:39', '2022-02-07 16:20:50');
 
 -- --------------------------------------------------------
 
@@ -134,11 +136,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2022_01_15_180927_create_daily_meal_items_table', 3),
 (5, '2022_01_15_185710_create_notifications_table', 4),
 (6, '2022_01_15_190301_create_notification_details_table', 4),
-(7, '2022_01_17_153007_create_meal_rates_table', 5),
 (13, '2022_01_22_150933_create_payments_table', 7),
 (16, '2022_01_17_153112_create_order_meals_table', 8),
 (18, '2022_01_25_142927_create_monthly_statements_table', 9),
-(19, '2022_01_29_165256_create_jobs_table', 10);
+(19, '2022_01_29_165256_create_jobs_table', 10),
+(22, '2022_01_17_153007_create_meal_rates_table', 11);
 
 -- --------------------------------------------------------
 
@@ -171,7 +173,9 @@ CREATE TABLE `monthly_statements` (
 INSERT INTO `monthly_statements` (`id`, `year`, `month`, `token_no`, `total_lunch`, `lunch_cost`, `total_dinner`, `dinner_cost`, `total_meal`, `total_cost`, `total_payment`, `give`, `take`, `created_at`, `updated_at`) VALUES
 (1, 2022, 'January', 121245, 7, 420, 7, 350, 14, 770, 1860.00, 0.00, 1090.00, NULL, NULL),
 (2, 2022, 'January', 475214, 2, 120, 2, 100, 4, 220, 320.50, 0.00, 100.50, NULL, NULL),
-(3, 2022, 'January', 142782, 2, 120, 2, 100, 4, 220, 220.00, 0.00, 0.00, NULL, NULL);
+(3, 2022, 'January', 142782, 2, 120, 2, 100, 4, 220, 220.00, 0.00, 0.00, NULL, NULL),
+(4, 2022, 'February', 142782, 5, 300, 5, 250, 10, 550, 500.00, 50.00, 0.00, NULL, NULL),
+(5, 2022, 'February', 192328, 5, 300, 5, 250, 10, 550, 400.00, 150.00, 0.00, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -259,7 +263,9 @@ INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`,
 (25, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-27', NULL, '2022-01-26 17:02:55', '2022-01-26 17:02:55'),
 (26, 5, 475214, 2, 120, 2, 100, 4, 220, '2022-01-27', NULL, '2022-01-26 17:05:01', '2022-01-26 17:05:01'),
 (29, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-31', NULL, '2022-01-30 17:39:37', '2022-01-30 17:39:37'),
-(31, 5, 475214, 1, 60, 1, 50, 2, 110, '2022-02-01', NULL, '2022-01-31 16:43:08', '2022-01-31 16:43:08');
+(31, 5, 475214, 1, 60, 1, 50, 2, 110, '2022-02-01', NULL, '2022-01-31 16:43:08', '2022-01-31 16:43:08'),
+(32, 4, 142782, 5, 300, 5, 250, 10, 550, '2022-02-08', NULL, '2022-02-07 15:48:02', '2022-02-07 15:48:02'),
+(33, 10, 192328, 5, 300, 5, 250, 10, 550, '2022-02-08', NULL, '2022-02-07 15:54:23', '2022-02-07 15:54:23');
 
 -- --------------------------------------------------------
 
@@ -269,6 +275,8 @@ INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`,
 
 CREATE TABLE `payments` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `year` int(11) NOT NULL,
+  `month` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -286,16 +294,18 @@ CREATE TABLE `payments` (
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`id`, `name`, `token_no`, `email`, `phone`, `amount`, `address`, `transaction_id`, `status`, `currency`, `payment_date`, `payment_time`) VALUES
-(2, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '61ed6e4de4448', 'Processing', 'BDT', '2022-01-23', '09:03:41pm'),
-(3, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '16ed6e45e4504', 'Processing', 'BDT', '2022-01-24', '09:19:41pm'),
-(4, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 200.00, 'Polashbari, Ashulia, Dhaka', '61ed77db3a6a1', 'Processing', 'BDT', '2022-01-23', '09:44:27pm'),
-(5, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 149.00, 'Polashbari, Ashulia, Dhaka', '61f02b3308fdf', 'Processing', 'BDT', '2022-01-25', '10:54:11pm'),
-(6, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 10.00, 'Polashbari, Ashulia, Dhaka', '61f02b65634b8', 'Processing', 'BDT', '2022-01-25', '10:55:01pm'),
-(7, 'Md Anwar Hossain', '475214', 'abc@gmail.com', '01794030592', 220.00, 'Polashbari, Ashulia, Dhaka', '61f17f7f920f3', 'Processing', 'BDT', '2022-01-26', '11:06:07pm'),
-(8, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 100.00, 'Polashbari, Ashulia, Dhaka', '61f17ff85444e', 'Processing', 'BDT', '2022-01-26', '11:08:08pm'),
-(9, 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 1200.00, 'Polashbari, Ashulia, Dhaka', '61ddbfb227839', 'Processing', 'BDT', '2022-01-11', '11:34:42pm'),
-(10, 'Md Anwar Hossain', '475214', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '61f80af8e7913', 'Processing', 'BDT', '2022-01-31', '10:14:48pm');
+INSERT INTO `payments` (`id`, `year`, `month`, `name`, `token_no`, `email`, `phone`, `amount`, `address`, `transaction_id`, `status`, `currency`, `payment_date`, `payment_time`) VALUES
+(2, 2022, 'January', 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '61ed6e4de4448', 'Processing', 'BDT', '2022-01-23', '09:03:41pm'),
+(3, 2022, 'January', 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '16ed6e45e4504', 'Processing', 'BDT', '2022-01-24', '09:19:41pm'),
+(4, 2022, 'January', 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 200.00, 'Polashbari, Ashulia, Dhaka', '61ed77db3a6a1', 'Processing', 'BDT', '2022-01-23', '09:44:27pm'),
+(5, 2022, 'January', 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 149.00, 'Polashbari, Ashulia, Dhaka', '61f02b3308fdf', 'Processing', 'BDT', '2022-01-25', '10:54:11pm'),
+(6, 2022, 'January', 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 10.00, 'Polashbari, Ashulia, Dhaka', '61f02b65634b8', 'Processing', 'BDT', '2022-01-25', '10:55:01pm'),
+(7, 2022, 'January', 'Md Anwar Hossain', '475214', 'abc@gmail.com', '01794030592', 220.00, 'Polashbari, Ashulia, Dhaka', '61f17f7f920f3', 'Processing', 'BDT', '2022-01-26', '11:06:07pm'),
+(8, 2022, 'January', 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 100.00, 'Polashbari, Ashulia, Dhaka', '61f17ff85444e', 'Processing', 'BDT', '2022-01-26', '11:08:08pm'),
+(9, 2022, 'January', 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 1200.00, 'Polashbari, Ashulia, Dhaka', '61ddbfb227839', 'Processing', 'BDT', '2022-01-11', '11:34:42pm'),
+(10, 2022, 'January', 'Md Anwar Hossain', '475214', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '61f80af8e7913', 'Processing', 'BDT', '2022-01-31', '10:14:48pm'),
+(11, 2022, 'February', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 500.00, 'Polashbari, Ashulia, Dhaka', '6201405ba7b0a', 'Processing', 'BDT', '2022-02-07', '09:52:59pm'),
+(12, 2022, 'February', 'Md Anwar Hossain', '192328', 'abc@gmail.com', '01794030592', 400.00, 'Polashbari, Ashulia, Dhaka', '620140c360625', 'Processing', 'BDT', '2022-02-07', '09:54:43pm');
 
 -- --------------------------------------------------------
 
@@ -460,13 +470,13 @@ ALTER TABLE `meal_rates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `monthly_statements`
 --
 ALTER TABLE `monthly_statements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -484,13 +494,13 @@ ALTER TABLE `notification_details`
 -- AUTO_INCREMENT for table `order_meals`
 --
 ALTER TABLE `order_meals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

@@ -15,6 +15,8 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->integer('year');
+            $table->string('month');
             $table->string('name');
             $table->string('token_no');
             $table->string('email');

@@ -16,11 +16,15 @@ class MealRateController extends Controller
     public function ChangeMealRate(Request $req)
     {
         $id = $req->id;
+        $lunch_time  = $req->lunch_time;
+        $dinner_time  = $req->dinner_time;
         $lunch_rate  = (int)$req->lunch_rate;
         $dinner_rate = (int)$req->dinner_rate;
         $total_rate  = $lunch_rate + $dinner_rate;
         date_default_timezone_set("Asia/Dhaka");
         $meal_rate = MealRate::find($id);
+        $meal_rate->lunch_expiry_time = $lunch_time;
+        $meal_rate->dinner_expiry_time = $dinner_time;
         $meal_rate->lunch_rate = $lunch_rate;
         $meal_rate->dinner_rate = $dinner_rate;
         $meal_rate->total_rate = $total_rate;

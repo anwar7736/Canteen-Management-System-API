@@ -15,6 +15,8 @@ class CreateMealRatesTable extends Migration
     {
         Schema::create('meal_rates', function (Blueprint $table) {
             $table->id();
+            $table->string('lunch_expiry_time');
+            $table->string('dinner_expiry_time');
             $table->integer('lunch_rate');
             $table->integer('dinner_rate');
             $table->integer('total_rate');

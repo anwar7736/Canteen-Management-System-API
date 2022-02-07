@@ -40,6 +40,37 @@
             <h4 class="mb-3">Billing Information</h4>
             <form action="{{ url('/pay') }}" method="POST" class="needs-validation">
                @CSRF
+               <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="firstName">Choose Year</label>
+                        <select class="form-control" name="year">
+                            <option value="" selected disabled>Choose Payment Year</option>
+                            <option value={{date('Y')}}>{{date('Y')}}</option>
+                            <option value={{date('Y', strtotime('-1 year'))}}>{{date('Y', strtotime('-1 year'))}}</option>
+                            <option value={{date('Y', strtotime('-2 year'))}}>{{date('Y', strtotime('-2 year'))}}</option>
+                         </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label for="month">Choose Month</label>
+                         <select class="form-control" name="month">
+                            <option value="" selected disabled>Choose Payment Month</option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="October">October</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                         </select>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="firstName">Full name</label>
