@@ -5,10 +5,48 @@ use App\Models\User;
 use App\Models\Notification;
 use App\Models\NotificationDetail;
 use Illuminate\Http\Request;
-use DB;
+use DB,Mail;
+use App\Mail\SendEmailNotification;
 
 class NotificationController extends Controller
 {
+    function SendEmailNotification(Request $req)
+    {
+        $receivers = $req->receivers;
+        $msg_title = $req->msg_title;
+        $msg_body  = $req->msg_body;
+
+        if($receivers === 'ForAllUser')
+        {
+            $users = User::where('role', 'user')->get();
+                foreach($users as $user)
+                {
+                    $data = ['name'=> $user->name, 
+                            'title'=> $msg_title, 
+                            'body'=>$msg_body];
+                    $sendAll = Mail::to($user->email)->send(new SendEmailNotification($data));
+                    
+                }
+                return 1;
+        }
+
+        else 
+        {
+            
+            foreach($receivers as $receiver)
+            {
+                $user = User::where('email', $receiver)->first();
+                $name = $user ? $user->name : 'there';
+                $data = ['name'=> $name, 
+                        'title'=> $msg_title, 
+                        'body'=>$msg_body];
+                $sendAll = Mail::to($receiver)->send(new SendEmailNotification($data));
+                
+            }
+            return 1;
+        }
+    }
+
     function InsertNotification(Request $req)
     {
         $author_id   = $req->author_id;
@@ -45,13 +83,7 @@ class NotificationController extends Controller
 
                     ]);
                 }
-                if($insertedAll)
-                {
-                    return 1;
-                }
-                else{
-                    return 0;
-                }
+                return $insertedAll ? 1 : 0;
             }
         }
         else{
@@ -76,16 +108,35 @@ class NotificationController extends Controller
 
                     ]);
                 }
-                if($inserted)
-                {
-                    return 1;
-                }
-                else{
-                    return 0;
-                }
+               return $inserted ? 1 : 0;
             
         }
 
+    }
+
+    function EditNotification(Request $req)
+    {
+        $notify_id = $req->notify_id;
+        $author_name = $req->author_name;
+        $msg_title = $req->msg_title;
+        $msg_body = $req->msg_body;
+        
+        $notification = Notification::findOrFail($notify_id);
+        $notification->author_name =  $author_name;
+        $notification->msg_title   =  $msg_title;
+        $notification->msg_body    =  $msg_body;
+        $notification->save();
+        return $notification ? 1 : 0;
+
+
+    }
+
+    function DeleteNotification(Request $req)
+    {
+        $notify_id = $req->notify_id;
+        $deleted1 = Notification::where('id', $notify_id)->delete();
+        $deleted2 = NotificationDetail::where('notification_id', $notify_id)->delete();
+        return ($deleted1 && $deleted2) ? 1 : 0;
     }
 
     function GetSelfCreatedNotification(Request $req)

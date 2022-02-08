@@ -14,6 +14,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentDetailsController;
 use App\Http\Controllers\MonthlyStatementController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\DailyBazarCostController;
 
 
 //Admin Login
@@ -28,6 +29,13 @@ Route::post('/GetAllPaymentByDate', [PaymentDetailsController::class, 'GetAllPay
 Route::get('/GetPaymentById/{payment_id}', [PaymentDetailsController::class, 'GetPaymentById']);
 Route::get('/PaymentDetailsByUser/{token_no}', [PaymentDetailsController::class, 'PaymentDetailsByUser']);
 Route::post('/PaymentDetailsFilterByDate', [PaymentDetailsController::class, 'PaymentDetailsFilterByDate']);
+
+//Daily Bazar Cost
+Route::get('/GetAllBazarCost', [DailyBazarCostController::class, 'GetAllBazarCost']);
+Route::post('/GetBazarCostByDate', [DailyBazarCostController::class, 'GetBazarCostByDate']);
+Route::post('/AddDailyBazarCost', [DailyBazarCostController::class, 'AddDailyBazarCost']);
+Route::post('/EditDailyBazarCost', [DailyBazarCostController::class, 'EditDailyBazarCost']);
+Route::get('/DeleteDailyBazarCost/{cost_id}', [DailyBazarCostController::class, 'DeleteDailyBazarCost']);
 
 //Member
 Route::get('/all_members', [MemberController::class, 'AllMembers']);
@@ -83,7 +91,10 @@ Route::get('/GetAllMealByUser/{user_id}', [DayWiseMealController::class, 'GetAll
 Route::post('/GetMealFilterByDate', [DayWiseMealController::class, 'GetMealFilterByDate']);
 
 //Notification
+Route::post('/SendEmailNotification', [NotificationController::class, 'SendEmailNotification']);
 Route::post('/SendMessage', [NotificationController::class, 'InsertNotification']);
+Route::post('/EditNotification', [NotificationController::class, 'EditNotification']);
+Route::get('/DeleteNotification/{notify_id}', [NotificationController::class, 'DeleteNotification']);
 Route::get('/GetSelfCreatedNotification/{user_id}', [NotificationController::class, 'GetSelfCreatedNotification']);
 Route::get('/GetAdminNotificationByUser/{user_id}', [NotificationController::class, 'GetAdminNotificationByUser']);
 Route::get('/CountLastestNotification/{user_id}', [NotificationController::class, 'CountLastestNotification']);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2022 at 07:24 PM
+-- Generation Time: Feb 08, 2022 at 08:01 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -21,6 +21,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `cms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `daily_bazar_costs`
+--
+
+CREATE TABLE `daily_bazar_costs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `year` int(11) NOT NULL,
+  `month` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `amount` double(8,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -140,7 +155,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2022_01_17_153112_create_order_meals_table', 8),
 (18, '2022_01_25_142927_create_monthly_statements_table', 9),
 (19, '2022_01_29_165256_create_jobs_table', 10),
-(22, '2022_01_17_153007_create_meal_rates_table', 11);
+(22, '2022_01_17_153007_create_meal_rates_table', 11),
+(24, '2022_02_08_153430_create_daily_bazar_costs_table', 12);
 
 -- --------------------------------------------------------
 
@@ -198,11 +214,8 @@ CREATE TABLE `notifications` (
 --
 
 INSERT INTO `notifications` (`id`, `author_id`, `author_name`, `msg_title`, `msg_body`, `create_date`, `create_time`) VALUES
-(4, 3, 'Anwar', 'Hello', 'Hello there, how are you?', '2022-01-16', '09:42:59pm'),
-(5, 1, 'Md Sujon Mollah', 'Check you mail', 'Dear All, Please check your mail', '2022-01-16', '09:44:45pm'),
-(9, 3, 'Anwar', 'Request for guest meal', 'Dear Admin,\r\nI want to  add some guest meal for 17-01-22', '2022-01-16', '10:04:05pm'),
-(10, 3, 'Md Anwar Hossain', 'Good Night', 'Good Night', '2022-01-17', '12:28:30am'),
-(11, 5, 'Good Night', 'Good Night', 'Hey there,\r\nHow are you?', '2022-01-31', '10:02:02pm');
+(5, 1, 'Md Anwar Hossain', 'Check Mail', 'Dear All,\nPlease check your mail', '2022-01-16', '09:44:45pm'),
+(11, 10, 'Good Night', 'Good Night', 'Hey there,\r\nHow are you?', '2022-01-31', '10:02:02pm');
 
 -- --------------------------------------------------------
 
@@ -224,12 +237,9 @@ CREATE TABLE `notification_details` (
 --
 
 INSERT INTO `notification_details` (`id`, `notification_id`, `user_id`, `status`, `create_date`, `create_time`) VALUES
-(2, 4, 1, 'Latest', '2022-01-16', '09:42:59pm'),
-(3, 5, 3, 'Read', '2022-01-16', '09:44:45pm'),
-(4, 5, 4, 'Latest', '2022-01-16', '09:44:45pm'),
-(5, 5, 5, 'Read', '2022-01-16', '09:44:45pm'),
-(9, 9, 1, 'Latest', '2022-01-16', '10:04:05pm'),
-(11, 10, 1, 'Latest', '2022-01-17', '12:28:30am'),
+(3, 5, 4, 'Read', '2022-01-16', '09:44:45pm'),
+(4, 5, 9, 'Latest', '2022-01-16', '09:44:45pm'),
+(5, 5, 10, 'Read', '2022-01-16', '09:44:45pm'),
 (12, 11, 1, 'Latest', '2022-01-31', '10:02:02pm');
 
 -- --------------------------------------------------------
@@ -354,12 +364,18 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `token_no`, `name`, `username`, `email`, `phone`, `role`, `status`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
 (1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', 'active', '$2y$10$TNTNLwY0bIY0QJlVYm27n.udAn4n8kaRYXvhpFwk/JGbbpwTuJeom', 'Polashbari, Ashulia, Dhaka', NULL, '2022-01-09 09:42:41', '2022-02-05 09:41:57'),
 (4, 142782, 'Shara', 'anwar123', 'shara6493@gmail.com', '01795700837', 'user', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/MH81KDFSpYEzifC7CsOWtv0Zeq990qe4HTW2iBPa.jpg', '2022-01-09 09:42:41', '2022-02-06 11:24:46'),
-(9, 824720, 'Md Ahsan Karim', 'ahsan123', 'abc@gmail.com', '01715414525', 'user', 'active', '$2y$10$ms.dc/xaupEwF9pMrSMtk.nH6XlqUEH/tMMZwaP3fyil3S4roWKM2', 'Savar,Dhaka', 'http://127.0.0.1:8000/storage/b014cQa0nAq1FfYzoDJw6eQTlumqhADg2qnFRWzk.jpg', '2022-02-06 10:42:12', '2022-02-06 11:24:56'),
+(9, 824720, 'Sujon', 'sujon123', 'anwarhossain773@gmail.com', '01715414525', 'user', 'active', '$2y$10$ms.dc/xaupEwF9pMrSMtk.nH6XlqUEH/tMMZwaP3fyil3S4roWKM2', 'Savar,Dhaka', 'http://127.0.0.1:8000/storage/b014cQa0nAq1FfYzoDJw6eQTlumqhADg2qnFRWzk.jpg', '2022-02-06 10:42:12', '2022-02-06 11:24:56'),
 (10, 192328, 'Shara Enterprise', 'shara1234', 'shara_enterprise@yahoo.com', '01715424526', 'user', 'active', '$2y$10$l205ZeJruxRam8TgnHI6Se1JUF/cRD2HFa0S7rceNgdrWBwZ14YKi', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/vc6OkHvNQ79gP3g3r9sUUfS3TTYUqDXevJ9G68FS.jpg', '2022-02-06 11:28:12', '2022-02-06 11:28:55');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `daily_bazar_costs`
+--
+ALTER TABLE `daily_bazar_costs`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `daily_meal_items`
@@ -443,6 +459,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `daily_bazar_costs`
+--
+ALTER TABLE `daily_bazar_costs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `daily_meal_items`
 --
 ALTER TABLE `daily_meal_items`
@@ -470,7 +492,7 @@ ALTER TABLE `meal_rates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `monthly_statements`
@@ -482,13 +504,13 @@ ALTER TABLE `monthly_statements`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `notification_details`
 --
 ALTER TABLE `notification_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `order_meals`
