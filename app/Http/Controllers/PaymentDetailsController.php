@@ -17,7 +17,7 @@ class PaymentDetailsController extends Controller
         $month    = $req->month;
         $amount   = $req->amount;
         $userInfo = User::where('token_no', $token_no)->first();
-        $trx_id = uniqid();
+        $trx_id = strtoupper(uniqid());
         date_default_timezone_set("Asia/Dhaka");
         $add_payment = DB::table('payments')
             ->where('transaction_id', $trx_id)

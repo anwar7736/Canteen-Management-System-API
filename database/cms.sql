@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2022 at 08:01 PM
+-- Generation Time: Feb 12, 2022 at 10:17 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -63,7 +63,7 @@ INSERT INTO `daily_meal_items` (`id`, `day`, `lunch_item`, `dinner_item`, `creat
 (4, 'মঙ্গলবার', 'মুরগীর মাংস, সবজি, ডাল', 'মলা মাছ ভর্তা, ডাল', '2022-02-07 15:58:47', '2022-02-07 15:58:48'),
 (5, 'বুধবার', 'বড় মাছ, শাক-সবজি, ডাল', 'বড় মাছ, আলু ভর্তা, ডাল', '2022-02-07 15:58:49', '2022-02-07 15:58:50'),
 (6, 'বৃহস্পতিবার', 'ছোট মাছ, ভর্তা, ডাল', 'ভুনা খিচুড়ি, সবজি, ডাল', '2022-02-07 15:58:51', '2022-02-07 15:58:52'),
-(7, 'শুক্রবার', 'গরুর মাংস, সবজি, ডাল', 'ডিম, শাক, ডাল', '2022-02-07 15:58:54', '2022-02-07 15:58:55');
+(7, 'শুক্রবার', 'গরুর মাংস, সবজি, ডাল', 'ডিম, শাক, ডাল', '2022-02-07 15:58:54', '2022-02-12 13:59:06');
 
 -- --------------------------------------------------------
 
@@ -115,7 +115,9 @@ CREATE TABLE `meal_rates` (
   `lunch_expiry_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `dinner_expiry_time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lunch_rate` int(11) NOT NULL,
+  `lunch_rate_bangla` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `dinner_rate` int(11) NOT NULL,
+  `dinner_rate_bangla` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `total_rate` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -125,8 +127,8 @@ CREATE TABLE `meal_rates` (
 -- Dumping data for table `meal_rates`
 --
 
-INSERT INTO `meal_rates` (`id`, `lunch_expiry_time`, `dinner_expiry_time`, `lunch_rate`, `dinner_rate`, `total_rate`, `created_at`, `updated_at`) VALUES
-(1, '3:50', '11:00', 60, 50, 110, '2022-02-07 16:15:39', '2022-02-07 16:20:50');
+INSERT INTO `meal_rates` (`id`, `lunch_expiry_time`, `dinner_expiry_time`, `lunch_rate`, `lunch_rate_bangla`, `dinner_rate`, `dinner_rate_bangla`, `total_rate`, `created_at`, `updated_at`) VALUES
+(1, 'বিকেল ৩টা ৩০মিনিট', 'রাত ১০টা ৩০মিনিট', 60, '৬০টাকা', 50, '৫০টাকা', 110, '2022-02-12 18:22:32', '2022-02-12 19:07:48');
 
 -- --------------------------------------------------------
 
@@ -155,8 +157,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2022_01_17_153112_create_order_meals_table', 8),
 (18, '2022_01_25_142927_create_monthly_statements_table', 9),
 (19, '2022_01_29_165256_create_jobs_table', 10),
-(22, '2022_01_17_153007_create_meal_rates_table', 11),
-(24, '2022_02_08_153430_create_daily_bazar_costs_table', 12);
+(24, '2022_02_08_153430_create_daily_bazar_costs_table', 12),
+(25, '2022_01_17_153007_create_meal_rates_table', 13);
 
 -- --------------------------------------------------------
 
@@ -190,8 +192,8 @@ INSERT INTO `monthly_statements` (`id`, `year`, `month`, `token_no`, `total_lunc
 (1, 2022, 'January', 121245, 7, 420, 7, 350, 14, 770, 1860.00, 0.00, 1090.00, NULL, NULL),
 (2, 2022, 'January', 475214, 2, 120, 2, 100, 4, 220, 320.50, 0.00, 100.50, NULL, NULL),
 (3, 2022, 'January', 142782, 2, 120, 2, 100, 4, 220, 220.00, 0.00, 0.00, NULL, NULL),
-(4, 2022, 'February', 142782, 5, 300, 5, 250, 10, 550, 500.00, 50.00, 0.00, NULL, NULL),
-(5, 2022, 'February', 192328, 5, 300, 5, 250, 10, 550, 400.00, 150.00, 0.00, NULL, NULL);
+(4, 2022, 'February', 142782, 7, 420, 6, 300, 13, 720, 500.00, 220.00, 0.00, NULL, NULL),
+(5, 2022, 'February', 192328, 6, 360, 6, 300, 12, 660, 660.00, 0.00, 0.00, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -215,7 +217,8 @@ CREATE TABLE `notifications` (
 
 INSERT INTO `notifications` (`id`, `author_id`, `author_name`, `msg_title`, `msg_body`, `create_date`, `create_time`) VALUES
 (5, 1, 'Md Anwar Hossain', 'Check Mail', 'Dear All,\nPlease check your mail', '2022-01-16', '09:44:45pm'),
-(11, 10, 'Good Night', 'Good Night', 'Hey there,\r\nHow are you?', '2022-01-31', '10:02:02pm');
+(11, 10, 'Good Night', 'Good Night', 'Hey there,\r\nHow are you?', '2022-01-31', '10:02:02pm'),
+(13, 10, 'Md Anwar Hossain', 'Good Night', 'Dear Admin,\r\nGood night\r\n\r\nThanks,\r\nMd Anwar Hossain', '2022-02-11', '09:50:41pm');
 
 -- --------------------------------------------------------
 
@@ -239,8 +242,9 @@ CREATE TABLE `notification_details` (
 INSERT INTO `notification_details` (`id`, `notification_id`, `user_id`, `status`, `create_date`, `create_time`) VALUES
 (3, 5, 4, 'Read', '2022-01-16', '09:44:45pm'),
 (4, 5, 9, 'Latest', '2022-01-16', '09:44:45pm'),
-(5, 5, 10, 'Read', '2022-01-16', '09:44:45pm'),
-(12, 11, 1, 'Latest', '2022-01-31', '10:02:02pm');
+(5, 5, 10, 'Unread', '2022-01-16', '09:44:45pm'),
+(12, 11, 1, 'Latest', '2022-01-31', '10:02:02pm'),
+(16, 13, 1, 'Latest', '2022-02-11', '09:50:41pm');
 
 -- --------------------------------------------------------
 
@@ -275,7 +279,10 @@ INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`,
 (29, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-31', NULL, '2022-01-30 17:39:37', '2022-01-30 17:39:37'),
 (31, 5, 475214, 1, 60, 1, 50, 2, 110, '2022-02-01', NULL, '2022-01-31 16:43:08', '2022-01-31 16:43:08'),
 (32, 4, 142782, 5, 300, 5, 250, 10, 550, '2022-02-08', NULL, '2022-02-07 15:48:02', '2022-02-07 15:48:02'),
-(33, 10, 192328, 5, 300, 5, 250, 10, 550, '2022-02-08', NULL, '2022-02-07 15:54:23', '2022-02-07 15:54:23');
+(33, 10, 192328, 5, 300, 5, 250, 10, 550, '2022-02-08', NULL, '2022-02-07 15:54:23', '2022-02-07 15:54:23'),
+(34, 10, 192328, 2, 120, 1, 50, 3, 170, '2022-02-12', '2022-02-11 09:49:51', '2022-02-11 15:48:37', '2022-02-11 09:49:51'),
+(35, 10, 192328, 1, 60, 1, 50, 2, 110, '2022-02-12', NULL, '2022-02-11 15:50:00', '2022-02-11 15:50:00'),
+(36, 4, 142782, 2, 120, 1, 50, 3, 170, '2022-02-14', NULL, '2022-02-12 20:24:15', '2022-02-12 14:24:25');
 
 -- --------------------------------------------------------
 
@@ -315,7 +322,8 @@ INSERT INTO `payments` (`id`, `year`, `month`, `name`, `token_no`, `email`, `pho
 (9, 2022, 'January', 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 1200.00, 'Polashbari, Ashulia, Dhaka', '61ddbfb227839', 'Processing', 'BDT', '2022-01-11', '11:34:42pm'),
 (10, 2022, 'January', 'Md Anwar Hossain', '475214', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '61f80af8e7913', 'Processing', 'BDT', '2022-01-31', '10:14:48pm'),
 (11, 2022, 'February', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 500.00, 'Polashbari, Ashulia, Dhaka', '6201405ba7b0a', 'Processing', 'BDT', '2022-02-07', '09:52:59pm'),
-(12, 2022, 'February', 'Md Anwar Hossain', '192328', 'abc@gmail.com', '01794030592', 400.00, 'Polashbari, Ashulia, Dhaka', '620140c360625', 'Processing', 'BDT', '2022-02-07', '09:54:43pm');
+(12, 2022, 'February', 'Md Anwar Hossain', '192328', 'abc@gmail.com', '01794030592', 400.00, 'Polashbari, Ashulia, Dhaka', '620140c360625', 'Processing', 'BDT', '2022-02-07', '09:54:43pm'),
+(16, 2022, 'February', 'Md Anwar Hossain', '192328', 'abc@gmail.com', '01794030592', 260.00, 'Polashbari, Ashulia, Dhaka', '620688c389013', 'Processing', 'BDT', '2022-02-11', '10:03:15pm');
 
 -- --------------------------------------------------------
 
@@ -365,7 +373,7 @@ INSERT INTO `users` (`id`, `token_no`, `name`, `username`, `email`, `phone`, `ro
 (1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', 'active', '$2y$10$TNTNLwY0bIY0QJlVYm27n.udAn4n8kaRYXvhpFwk/JGbbpwTuJeom', 'Polashbari, Ashulia, Dhaka', NULL, '2022-01-09 09:42:41', '2022-02-05 09:41:57'),
 (4, 142782, 'Shara', 'anwar123', 'shara6493@gmail.com', '01795700837', 'user', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/MH81KDFSpYEzifC7CsOWtv0Zeq990qe4HTW2iBPa.jpg', '2022-01-09 09:42:41', '2022-02-06 11:24:46'),
 (9, 824720, 'Sujon', 'sujon123', 'anwarhossain773@gmail.com', '01715414525', 'user', 'active', '$2y$10$ms.dc/xaupEwF9pMrSMtk.nH6XlqUEH/tMMZwaP3fyil3S4roWKM2', 'Savar,Dhaka', 'http://127.0.0.1:8000/storage/b014cQa0nAq1FfYzoDJw6eQTlumqhADg2qnFRWzk.jpg', '2022-02-06 10:42:12', '2022-02-06 11:24:56'),
-(10, 192328, 'Shara Enterprise', 'shara1234', 'shara_enterprise@yahoo.com', '01715424526', 'user', 'active', '$2y$10$l205ZeJruxRam8TgnHI6Se1JUF/cRD2HFa0S7rceNgdrWBwZ14YKi', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/vc6OkHvNQ79gP3g3r9sUUfS3TTYUqDXevJ9G68FS.jpg', '2022-02-06 11:28:12', '2022-02-06 11:28:55');
+(10, 192328, 'Shara Enterprise', 'shara1234', 'shara_enterprise@yahoo.com', '01715424526', 'user', 'active', '$2y$10$l205ZeJruxRam8TgnHI6Se1JUF/cRD2HFa0S7rceNgdrWBwZ14YKi', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/US8GKKLqrkhlsT8dISBNQpmSYO3tUaix3KbYI5Ex.jpg', '2022-02-06 11:28:12', '2022-02-11 09:47:11');
 
 --
 -- Indexes for dumped tables
@@ -492,7 +500,7 @@ ALTER TABLE `meal_rates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `monthly_statements`
@@ -504,25 +512,25 @@ ALTER TABLE `monthly_statements`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `notification_details`
 --
 ALTER TABLE `notification_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `order_meals`
 --
 ALTER TABLE `order_meals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

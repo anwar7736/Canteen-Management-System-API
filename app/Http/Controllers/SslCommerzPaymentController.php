@@ -28,7 +28,7 @@ class SslCommerzPaymentController extends Controller
         $post_data = array();
         $post_data['total_amount'] = $request->amount; # You cant not pay less than 10
         $post_data['currency'] = "BDT";
-        $post_data['tran_id'] = uniqid(); // tran_id must be unique
+        $post_data['tran_id'] = strtoupper(uniqid()); // tran_id must be unique
 
         # CUSTOMER INFORMATION
         $post_data['year'] = $request->year;

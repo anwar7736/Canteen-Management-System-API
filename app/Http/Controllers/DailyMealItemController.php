@@ -12,6 +12,12 @@ class DailyMealItemController extends Controller
         return $data;
     }
     
+    public function DayWiseMealItemById($id)
+    {
+        $data = DailyMealItem::where('id', $id)->get();
+        return $data;
+    }
+    
     public function EditDayWiseMealItem(Request $req)
     {
         $item_id     = $req->item_id;

@@ -18,7 +18,9 @@ class CreateMealRatesTable extends Migration
             $table->string('lunch_expiry_time');
             $table->string('dinner_expiry_time');
             $table->integer('lunch_rate');
+            $table->text('lunch_rate_bangla');
             $table->integer('dinner_rate');
+            $table->text('dinner_rate_bangla');
             $table->integer('total_rate');
             $table->timestamps();
         });

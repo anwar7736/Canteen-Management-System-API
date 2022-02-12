@@ -68,6 +68,7 @@ Route::get('/LastSevenDaysMealReport/{user_id}', [DashboardController::class, 'L
 //DayWiseMealItem
 
 Route::get('/GetDailyMealItem', [DailyMealItemController::class, 'GetDayWiseMealItem']);
+Route::get('/DayWiseMealItemById/{id}', [DailyMealItemController::class, 'DayWiseMealItemById']);
 Route::post('/EditDayWiseMealItem', [DailyMealItemController::class, 'EditDayWiseMealItem']);
 
 //Meal Rate
