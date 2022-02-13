@@ -78,9 +78,11 @@ Route::post('/ChangeMealRate', [MealRateController::class, 'ChangeMealRate']);
 //OrderDailyMeal
 Route::post('/OrderDailyMeal', [OrderMealController::class, 'OrderDailyMeal']);
 Route::get('/GetTodayOrderInfo/{user_id}/{token_no}', [OrderMealController::class, 'GetTodayOrderInfo']);
+Route::get('/GetTodayAllOrderInfo', [OrderMealController::class, 'GetTodayAllOrderInfo']);
+Route::get('/GetTodayOrderInfoByOrderId/{order_id}', [OrderMealController::class, 'GetTodayOrderInfoByOrderId']);
 Route::post('/ChangeOrderedMeal', [OrderMealController::class, 'ChangeOrderedMeal']);
-Route::get('/DeleteTodayOrderedMeal/{order_id}/{token_no}', [OrderMealController::class, 'DeleteTodayOrderedMeal']);
-Route::get('/RestoreTodayOrderedMeal/{order_id}/{token_no}', [OrderMealController::class, 'RestoreTodayOrderedMeal']);
+Route::get('/DeleteTodayOrderedMeal/{order_id}', [OrderMealController::class, 'DeleteTodayOrderedMeal']);
+Route::get('/RestoreTodayOrderedMeal/{order_id}', [OrderMealController::class, 'RestoreTodayOrderedMeal']);
 
 //MonthlyStatement
 Route::get('/GetYearsAndMonths', [MonthlyStatementController::class, 'GetYearsAndMonths']);

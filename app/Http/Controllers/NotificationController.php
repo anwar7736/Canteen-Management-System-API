@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
-use App\Models\Notification;
+use App\Models\Notification as Notify;
 use App\Models\NotificationDetail;
 use Illuminate\Http\Request;
 use DB,Mail;
-use App\Mail\SendEmailNotification;
+use App\Notifications\AdminNotification;
+use Illuminate\Support\Facades\Notification;
 
 class NotificationController extends Controller
 {
@@ -24,7 +25,7 @@ class NotificationController extends Controller
                     $data = ['name'=> $user->name, 
                             'title'=> $msg_title, 
                             'body'=>$msg_body];
-                    $sendAll = Mail::to($user->email)->send(new SendEmailNotification($data));
+                    $sendAll =  Notification::send($user, new AdminNotification($data));
                     
                 }
                 return 1;
@@ -32,15 +33,15 @@ class NotificationController extends Controller
 
         else 
         {
-            
-            foreach($receivers as $receiver)
+            $receiver_list = explode(",",$receivers);
+            foreach($receiver_list as $receiver)
             {
                 $user = User::where('email', $receiver)->first();
                 $name = $user ? $user->name : 'there';
                 $data = ['name'=> $name, 
                         'title'=> $msg_title, 
                         'body'=>$msg_body];
-                $sendAll = Mail::to($receiver)->send(new SendEmailNotification($data));
+                $sendAll = Notification::send($receiver, new AdminNotification($data));
                 
             }
             return 1;
@@ -60,7 +61,7 @@ class NotificationController extends Controller
 
         if($author_role === 'admin')
         {
-            $lastID = Notification::insertGetId([
+            $lastID = Notify::insertGetId([
                     'author_id'   => $author_id,
                     'author_name' => $author_name,
                     'msg_title'   => $msg_title,
@@ -87,7 +88,7 @@ class NotificationController extends Controller
             }
         }
         else{
-            $lastID = Notification::insertGetId([
+            $lastID = Notify::insertGetId([
                     'author_id'   => $author_id,
                     'author_name' => $author_name,
                     'msg_title'   => $msg_title,
@@ -121,7 +122,7 @@ class NotificationController extends Controller
         $msg_title = $req->msg_title;
         $msg_body = $req->msg_body;
         
-        $notification = Notification::findOrFail($notify_id);
+        $notification = Notify::findOrFail($notify_id);
         $notification->author_name =  $author_name;
         $notification->msg_title   =  $msg_title;
         $notification->msg_body    =  $msg_body;
@@ -134,7 +135,7 @@ class NotificationController extends Controller
     function DeleteNotification(Request $req)
     {
         $notify_id = $req->notify_id;
-        $deleted1 = Notification::where('id', $notify_id)->delete();
+        $deleted1 = Notify::where('id', $notify_id)->delete();
         $deleted2 = NotificationDetail::where('notification_id', $notify_id)->delete();
         return ($deleted1 && $deleted2) ? 1 : 0;
     }

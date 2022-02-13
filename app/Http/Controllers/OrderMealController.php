@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\OrderMeal;
 use App\Models\MealRate;
 use App\Models\Payment;
+use App\Models\User;
 use App\Models\MonthlyStatement;
 
 class OrderMealController extends Controller
@@ -70,11 +71,13 @@ class OrderMealController extends Controller
     }
     public function OrderDailyMeal(Request $req)
     {
-        $user_id         =  $req->user_id;
         $token_no        =  $req->token_no;
         $lunch           =  (int)$req->lunch;
         $dinner          =  (int)$req->dinner;
         $total_meal      =  $lunch + $dinner;
+
+        $user = User::where('token_no', $token_no)->first();
+        $user_id = $user->id;
 
         date_default_timezone_set("Asia/Dhaka");
 
@@ -177,6 +180,31 @@ class OrderMealController extends Controller
 
         return  $today_order_info;
     }
+    
+    public function GetTodayOrderInfoByOrderId(Request $req)
+    {
+        $order_id = $req->order_id;
+        date_default_timezone_set("Asia/Dhaka");
+        $meal_given_date =  date("Y-m-d", strtotime("+1 day"));
+        $today_order_info = OrderMeal::where([
+            'id'=>$order_id, 
+            'meal_given_date'=> $meal_given_date
+            ])->get();
+
+        return  $today_order_info;
+    }
+
+
+    public function GetTodayAllOrderInfo(Request $req)
+    {
+        date_default_timezone_set("Asia/Dhaka");
+        $meal_given_date =  date("Y-m-d", strtotime("+1 day"));
+        $today_order_info = OrderMeal::where([
+            'meal_given_date'=> $meal_given_date
+            ])->get();
+
+        return  $today_order_info;
+    }
 
     public function ChangeOrderedMeal(Request $req)
     {
@@ -225,7 +253,8 @@ class OrderMealController extends Controller
     public function DeleteTodayOrderedMeal(Request $req)
     {
         $order_id = $req->order_id;
-        $token_no =  $req->token_no;
+        $order = OrderMeal::where('id', $order_id)->first();
+        $token_no =  $order->token_no;
         $result   = OrderMeal::find($order_id)->delete();
         if($result)
         {
@@ -253,7 +282,8 @@ class OrderMealController extends Controller
     public function RestoreTodayOrderedMeal(Request $req)
     {
         $order_id = $req->order_id;
-        $token_no =  $req->token_no;
+        $order = OrderMeal::where('id', $order_id)->withTrashed()->first();
+        $token_no =  $order->token_no;
         $result   = OrderMeal::withTrashed()->find($order_id)->restore();
         if($result)
         {
