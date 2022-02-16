@@ -33,17 +33,23 @@ class NotificationController extends Controller
 
         else 
         {
+
+
             $receiver_list = explode(",",$receivers);
-            foreach($receiver_list as $receiver)
+            $len = count($receiver_list);
+
+            for($i = 0; $i < $len; $i++)
             {
+                $receiver = trim($receiver_list[$i]);
+
                 $user = User::where('email', $receiver)->first();
                 $name = $user ? $user->name : 'there';
                 $data = ['name'=> $name, 
                         'title'=> $msg_title, 
                         'body'=>$msg_body];
                 $sendAll = Notification::send($receiver, new AdminNotification($data));
-                
             }
+
             return 1;
         }
     }
@@ -115,6 +121,13 @@ class NotificationController extends Controller
 
     }
 
+    function GetAllNotificationForAdmin(Request $req)
+    {
+        $author_id = $req->author_id;
+        $notifications = Notify::where('author_id', $author_id)->get();
+        return $notifications;
+    }
+
     function EditNotification(Request $req)
     {
         $notify_id = $req->notify_id;
@@ -138,6 +151,13 @@ class NotificationController extends Controller
         $deleted1 = Notify::where('id', $notify_id)->delete();
         $deleted2 = NotificationDetail::where('notification_id', $notify_id)->delete();
         return ($deleted1 && $deleted2) ? 1 : 0;
+    }
+
+    function GetNotification(Request $req)
+    {
+        $notify_id = $req->notify_id;
+        $notification = Notify::where('id', $notify_id)->get();
+        return $notification;
     }
 
     function GetSelfCreatedNotification(Request $req)

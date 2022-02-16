@@ -96,8 +96,10 @@ Route::post('/GetMealFilterByDate', [DayWiseMealController::class, 'GetMealFilte
 //Notification
 Route::post('/SendEmailNotification', [NotificationController::class, 'SendEmailNotification']);
 Route::post('/SendMessage', [NotificationController::class, 'InsertNotification']);
+Route::get('/GetAllNotificationForAdmin/{author_id}', [NotificationController::class, 'GetAllNotificationForAdmin']);
 Route::post('/EditNotification', [NotificationController::class, 'EditNotification']);
 Route::get('/DeleteNotification/{notify_id}', [NotificationController::class, 'DeleteNotification']);
+Route::get('/GetNotification/{notify_id}', [NotificationController::class, 'GetNotification']);
 Route::get('/GetSelfCreatedNotification/{user_id}', [NotificationController::class, 'GetSelfCreatedNotification']);
 Route::get('/GetAdminNotificationByUser/{user_id}', [NotificationController::class, 'GetAdminNotificationByUser']);
 Route::get('/CountLastestNotification/{user_id}', [NotificationController::class, 'CountLastestNotification']);
