@@ -23,7 +23,7 @@ Route::post('/admin_login', [LoginController::class, 'AdminLogin']);
 //Payment
 Route::post('/AddPayment', [PaymentDetailsController::class, 'AddPayment']);
 Route::post('/EditPayment', [PaymentDetailsController::class, 'EditPayment']);
-Route::post('/DeletePayment', [PaymentDetailsController::class, 'DeletePayment']);
+Route::get('/DeletePayment/{payment_id}', [PaymentDetailsController::class, 'DeletePayment']);
 Route::get('/GetAllPayments', [PaymentDetailsController::class, 'GetAllPayments']);
 Route::post('/GetAllPaymentByDate', [PaymentDetailsController::class, 'GetAllPaymentByDate']);
 Route::get('/GetPaymentById/{payment_id}', [PaymentDetailsController::class, 'GetPaymentById']);

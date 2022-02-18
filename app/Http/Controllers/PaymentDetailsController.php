@@ -15,6 +15,7 @@ class PaymentDetailsController extends Controller
         $token_no = $req->token_no;
         $year     = $req->year;
         $month    = $req->month;
+        $status    = $req->status;
         $amount   = $req->amount;
         $userInfo = User::where('token_no', $token_no)->first();
         $trx_id = strtoupper(uniqid());
@@ -29,7 +30,7 @@ class PaymentDetailsController extends Controller
                 'email' => $userInfo->email,
                 'phone' => $userInfo->phone,
                 'amount' => $amount,
-                'status' => 'Completed',
+                'status' => $status,
                 'address' => $userInfo->address,
                 'transaction_id' => $trx_id,
                 'currency' => "BDT",
@@ -148,12 +149,11 @@ class PaymentDetailsController extends Controller
     public function DeletePayment(Request $req)
     {
         $payment_id = $req->payment_id;
-        $token_no = $req->token_no;
-        $year     = $req->year;
-        $month    = $req->month;
-
-        $old_payment = Payment::where('id', $payment_id)->first();
-        $old_amount = $old_payment->amount;
+        $payment = Payment::where('id', $payment_id)->first();
+        $token_no =  $payment->token_no;
+        $year     = $payment->year;
+        $month    = $payment->month;
+        $old_amount = $payment->amount;
 
         date_default_timezone_set("Asia/Dhaka");
         $delete_payment = DB::table('payments')
