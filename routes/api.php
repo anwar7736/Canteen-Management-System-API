@@ -20,6 +20,10 @@ use App\Http\Controllers\DailyBazarCostController;
 //Admin Login
 Route::post('/admin_login', [LoginController::class, 'AdminLogin']);
 
+//Admin Dashboard Summary
+Route::get('/AdminDashboardSummary', [DashboardController::class, 'AdminDashboardSummary']);
+
+
 //Payment
 Route::post('/AddPayment', [PaymentDetailsController::class, 'AddPayment']);
 Route::post('/EditPayment', [PaymentDetailsController::class, 'EditPayment']);
@@ -90,6 +94,8 @@ Route::get('/GetAllMonthlyStatement/{token_no}', [MonthlyStatementController::cl
 Route::post('/GetMonthlyStatementByKey', [MonthlyStatementController::class, 'GetMonthlyStatementByKey']);
 
 //DayWiseMealReportByUser
+Route::get('/GetAllMealDetails', [DayWiseMealController::class, 'GetAllMealDetails']);
+Route::post('/GetMealByFilter', [DayWiseMealController::class, 'GetMealByFilter']);
 Route::get('/GetAllMealByUser/{user_id}', [DayWiseMealController::class, 'GetAllMealByUser']);
 Route::post('/GetMealFilterByDate', [DayWiseMealController::class, 'GetMealFilterByDate']);
 
