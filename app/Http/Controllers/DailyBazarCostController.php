@@ -7,6 +7,7 @@ use App\Models\DailyBazarCost;
 
 class DailyBazarCostController extends Controller
 {
+    
     function GetAllBazarCost()
     {
         $data = DailyBazarCost::orderBy('id', 'desc')->get();
@@ -21,11 +22,19 @@ class DailyBazarCostController extends Controller
         $data = DailyBazarCost::whereBetween('date', [$from_date, $to_date])->get();
         return $data;
     }
+    
+    function GetBazarCostById(Request $req)
+    {
+        $cost_id = $req->cost_id;
+        $data = DailyBazarCost::where('id', $cost_id)->first();
+        return $data;
+    }
 
     function AddDailyBazarCost(Request $req)
     {
         $name = $req->name;
         $amount = $req->amount;
+        date_default_timezone_set('Asia/Dhaka');
         $year = date('Y');
         $months = ["January", "February", "March", "April", "May", "June", "July", "August", "September","October",	"November", "December"];
         $month = $months[date('m')-1];

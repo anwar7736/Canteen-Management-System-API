@@ -37,6 +37,7 @@ Route::post('/PaymentDetailsFilterByDate', [PaymentDetailsController::class, 'Pa
 //Daily Bazar Cost
 Route::get('/GetAllBazarCost', [DailyBazarCostController::class, 'GetAllBazarCost']);
 Route::post('/GetBazarCostByDate', [DailyBazarCostController::class, 'GetBazarCostByDate']);
+Route::get('/GetBazarCostById/{cost_id}', [DailyBazarCostController::class, 'GetBazarCostById']);
 Route::post('/AddDailyBazarCost', [DailyBazarCostController::class, 'AddDailyBazarCost']);
 Route::post('/EditDailyBazarCost', [DailyBazarCostController::class, 'EditDailyBazarCost']);
 Route::get('/DeleteDailyBazarCost/{cost_id}', [DailyBazarCostController::class, 'DeleteDailyBazarCost']);
