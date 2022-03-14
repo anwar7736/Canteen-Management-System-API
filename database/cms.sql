@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2022 at 07:00 PM
+-- Generation Time: Mar 14, 2022 at 08:42 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -21,6 +21,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `cms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin_profile`
+--
+
+CREATE TABLE `admin_profile` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `shop_logo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shop_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shop_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shop_owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admin_profile`
+--
+
+INSERT INTO `admin_profile` (`id`, `shop_logo`, `shop_name`, `shop_address`, `shop_owner`, `owner_phone`, `owner_email`, `created_at`, `updated_at`) VALUES
+(1, 'http://127.0.0.1:8000/storage/TmPYEjrmSpcRV5C07wDXkt8gF91TNXt3pAIWcL6X.png', 'Anwar Super Canteen', 'Polashbari, Ashulia, Dhaka', 'Md Anwar Hossain', '01794030592', 'anwarhossain7736@gmail.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -43,7 +68,8 @@ CREATE TABLE `daily_bazar_costs` (
 
 INSERT INTO `daily_bazar_costs` (`id`, `year`, `month`, `date`, `name`, `amount`) VALUES
 (8, 2022, 'February', '2022-02-21', 'Anwar', 3000.00),
-(9, 2022, 'January', '2022-01-18', 'Anwar', 3500.00);
+(9, 2022, 'February', '2022-02-22', 'Anwar', 3500.00),
+(12, 2022, 'March', '2022-03-14', 'Sujon Mollah', 1250.00);
 
 -- --------------------------------------------------------
 
@@ -166,7 +192,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (18, '2022_01_25_142927_create_monthly_statements_table', 9),
 (19, '2022_01_29_165256_create_jobs_table', 10),
 (24, '2022_02_08_153430_create_daily_bazar_costs_table', 12),
-(25, '2022_01_17_153007_create_meal_rates_table', 13);
+(25, '2022_01_17_153007_create_meal_rates_table', 13),
+(27, '2022_03_14_182217_create_admin_profile_table', 14);
 
 -- --------------------------------------------------------
 
@@ -402,6 +429,12 @@ INSERT INTO `users` (`id`, `token_no`, `name`, `username`, `email`, `phone`, `ro
 --
 
 --
+-- Indexes for table `admin_profile`
+--
+ALTER TABLE `admin_profile`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `daily_bazar_costs`
 --
 ALTER TABLE `daily_bazar_costs`
@@ -489,10 +522,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admin_profile`
+--
+ALTER TABLE `admin_profile`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `daily_bazar_costs`
 --
 ALTER TABLE `daily_bazar_costs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `daily_meal_items`
@@ -522,7 +561,7 @@ ALTER TABLE `meal_rates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `monthly_statements`

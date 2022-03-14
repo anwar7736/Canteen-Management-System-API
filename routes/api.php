@@ -15,6 +15,7 @@ use App\Http\Controllers\PaymentDetailsController;
 use App\Http\Controllers\MonthlyStatementController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\DailyBazarCostController;
+use App\Http\Controllers\AdminProfileController;
 
 
 //Admin Login
@@ -22,7 +23,6 @@ Route::post('/admin_login', [LoginController::class, 'AdminLogin']);
 
 //Admin Dashboard Summary
 Route::get('/AdminDashboardSummary', [DashboardController::class, 'AdminDashboardSummary']);
-
 
 //Payment
 Route::post('/AddPayment', [PaymentDetailsController::class, 'AddPayment']);
@@ -58,6 +58,10 @@ Route::post('/GetOTPExpiration', [PasswordController::class, 'GetOTPExpiration']
 Route::post('/OTPVerification', [PasswordController::class, 'OTPVerification']);
 Route::post('/ResetPassword', [PasswordController::class, 'ResetPassword']);
 Route::post('/ChangePassword', [PasswordController::class, 'ChangePassword']);
+
+//Admin Profile
+Route::get('/GetProfileInfo', [AdminProfileController::class, 'GetProfileInfo']);
+Route::post('/UpdateAdminProfile', [AdminProfileController::class, 'UpdateAdminProfile']);
 
 //User Profile
 
