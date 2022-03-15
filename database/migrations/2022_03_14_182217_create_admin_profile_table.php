@@ -19,6 +19,7 @@ class CreateAdminProfileTable extends Migration
             $table->string('shop_name');
             $table->string('shop_address');
             $table->string('shop_owner');
+            $table->string('username');
             $table->string('owner_phone');
             $table->string('owner_email');
             $table->timestamps();

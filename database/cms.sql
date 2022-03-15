@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2022 at 08:42 PM
+-- Generation Time: Mar 15, 2022 at 09:47 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -34,6 +34,7 @@ CREATE TABLE `admin_profile` (
   `shop_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `shop_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `shop_owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `owner_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `owner_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -44,8 +45,8 @@ CREATE TABLE `admin_profile` (
 -- Dumping data for table `admin_profile`
 --
 
-INSERT INTO `admin_profile` (`id`, `shop_logo`, `shop_name`, `shop_address`, `shop_owner`, `owner_phone`, `owner_email`, `created_at`, `updated_at`) VALUES
-(1, 'http://127.0.0.1:8000/storage/TmPYEjrmSpcRV5C07wDXkt8gF91TNXt3pAIWcL6X.png', 'Anwar Super Canteen', 'Polashbari, Ashulia, Dhaka', 'Md Anwar Hossain', '01794030592', 'anwarhossain7736@gmail.com', NULL, NULL);
+INSERT INTO `admin_profile` (`id`, `shop_logo`, `shop_name`, `shop_address`, `shop_owner`, `username`, `owner_phone`, `owner_email`, `created_at`, `updated_at`) VALUES
+(1, 'http://127.0.0.1:8000/storage/dJ5Byy1aBdScdRCUfgM5YYvbbIvAgz8zCpN3LjST.webp', 'Anwar Super Canteen', 'Polashbari, Ashulia, Dhaka', 'Md Anwar Hossain', 'admin1234', '01794030592', 'anwarhossain7736@gmail.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -193,7 +194,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (19, '2022_01_29_165256_create_jobs_table', 10),
 (24, '2022_02_08_153430_create_daily_bazar_costs_table', 12),
 (25, '2022_01_17_153007_create_meal_rates_table', 13),
-(27, '2022_03_14_182217_create_admin_profile_table', 14);
+(28, '2022_03_14_182217_create_admin_profile_table', 14);
 
 -- --------------------------------------------------------
 
@@ -418,7 +419,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `token_no`, `name`, `username`, `email`, `phone`, `role`, `status`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
-(1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', 'active', '$2y$10$TNTNLwY0bIY0QJlVYm27n.udAn4n8kaRYXvhpFwk/JGbbpwTuJeom', 'Polashbari, Ashulia, Dhaka', NULL, '2022-01-09 09:42:41', '2022-02-05 09:41:57'),
+(1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', 'active', '$2y$10$TNTNLwY0bIY0QJlVYm27n.udAn4n8kaRYXvhpFwk/JGbbpwTuJeom', 'Polashbari, Ashulia, Dhaka', NULL, '2022-01-09 09:42:41', '2022-03-15 14:45:57'),
 (4, 142782, 'Shara Enterprise', 'anwar123', 'shara6493@gmail.com', '01795700837', 'user', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/MH81KDFSpYEzifC7CsOWtv0Zeq990qe4HTW2iBPa.jpg', '2022-01-09 09:42:41', '2022-02-20 10:27:42'),
 (9, 824720, 'Sujon', 'sujon123', 'mdshahjahansheikh1995@gmail.com', '01715414525', 'user', 'active', '$2y$10$ms.dc/xaupEwF9pMrSMtk.nH6XlqUEH/tMMZwaP3fyil3S4roWKM2', 'Savar,Dhaka', 'http://127.0.0.1:8000/storage/b014cQa0nAq1FfYzoDJw6eQTlumqhADg2qnFRWzk.jpg', '2022-02-06 10:42:12', '2022-02-20 09:40:08'),
 (10, 192328, 'Shara Enterprise', 'shara1234', 'shara_enterprise@yahoo.com', '01715424526', 'user', 'inactive', '$2y$10$l205ZeJruxRam8TgnHI6Se1JUF/cRD2HFa0S7rceNgdrWBwZ14YKi', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/US8GKKLqrkhlsT8dISBNQpmSYO3tUaix3KbYI5Ex.jpg', '2022-02-06 11:28:12', '2022-02-20 09:44:24'),
@@ -525,7 +526,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admin_profile`
 --
 ALTER TABLE `admin_profile`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `daily_bazar_costs`
@@ -561,7 +562,7 @@ ALTER TABLE `meal_rates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `monthly_statements`

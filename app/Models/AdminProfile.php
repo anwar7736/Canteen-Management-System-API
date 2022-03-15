@@ -9,6 +9,6 @@ class AdminProfile extends Model
 {
     use HasFactory;
     protected $table = 'admin_profile';
-    protected $fillable = ['shop_logo', 'shop_name', 'shop_address', 'shop_owner', 'owner_phone', 'owner_email'];
+    protected $fillable = ['shop_logo', 'shop_name', 'shop_address', 'shop_owner', 'owner_phone', 'owner_email', 'username'];
     public $timestamps = false;
 }
