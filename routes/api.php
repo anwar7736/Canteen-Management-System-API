@@ -102,6 +102,7 @@ Route::post('/GetMonthlyStatementByKey', [MonthlyStatementController::class, 'Ge
 Route::get('/GetAllMealDetails', [DayWiseMealController::class, 'GetAllMealDetails']);
 Route::post('/GetMealByFilter', [DayWiseMealController::class, 'GetMealByFilter']);
 Route::get('/GetAllMealByUser/{user_id}', [DayWiseMealController::class, 'GetAllMealByUser']);
+Route::get('/GetMealByOrderId/{order_id}', [DayWiseMealController::class, 'GetMealByOrderId']);
 Route::post('/GetMealFilterByDate', [DayWiseMealController::class, 'GetMealFilterByDate']);
 
 //Notification

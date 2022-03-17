@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\OrderMeal;
+use DB;
 
 class DayWiseMealController extends Controller
 {
@@ -13,6 +14,19 @@ class DayWiseMealController extends Controller
         $data = OrderMeal::where('user_id', $user_id)
                         ->orderBy('id', 'desc')->get();
         return $data;
+    }
+    
+    public function GetMealByOrderId(Request $req)
+    {
+        $order_id = $req->order_id;
+        $data = OrderMeal::where('id', $order_id)->first();
+        $user_id = $data->user_id;
+        $details = DB::table('order_meals')
+                ->join('users', 'order_meals.user_id', 'users.id')
+                ->where(['order_meals.id'=>$order_id])
+                ->get();
+                
+        return $details;
     }
     
     public function GetAllMealDetails(Request $req)

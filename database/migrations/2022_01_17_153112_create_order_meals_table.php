@@ -23,6 +23,7 @@ class CreateOrderMealsTable extends Migration
             $table->integer('dinner_amount');
             $table->integer('total_meal');
             $table->integer('total_amount');
+            $table->string('notes', 1000)->nullable();
             $table->string('meal_given_date');
             $table->softDeletes();
             $table->timestamps();

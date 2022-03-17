@@ -74,8 +74,9 @@ class OrderMealController extends Controller
         $token_no        =  $req->token_no;
         $lunch           =  (int)$req->lunch;
         $dinner          =  (int)$req->dinner;
+        $notes           = $req->notes;
         $total_meal      =  $lunch + $dinner;
-
+        
         $user = User::where('token_no', $token_no)->first();
         $user_id = $user->id;
 
@@ -111,6 +112,7 @@ class OrderMealController extends Controller
             $order->dinner_amount = $dinner_amount;
             $order->total_meal = $total_meal;
             $order->total_amount = $total_amount;
+            $order->notes = $notes;
             $order->meal_given_date = $meal_given_date;
             $result = $order->save();
 
@@ -213,6 +215,7 @@ class OrderMealController extends Controller
         $lunch         =  (int)$req->lunch;
         $dinner        =  (int)$req->dinner;
         $total_meal    =  $lunch + $dinner;
+        $notes         =  $req->notes;
         $meal_rates    =  MealRate::first();
         $lunch_rate    =  $meal_rates->lunch_rate;
         $dinner_rate   =  $meal_rates->dinner_rate;
@@ -227,6 +230,7 @@ class OrderMealController extends Controller
         $ordered_meal->dinner_amount = $dinner_amount;
         $ordered_meal->total_meal = $total_meal;
         $ordered_meal->total_amount = $total_amount;
+        $ordered_meal->notes = $notes;
         $result = $ordered_meal->save();
         if($result)
         {

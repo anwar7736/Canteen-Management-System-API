@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2022 at 09:47 PM
+-- Generation Time: Mar 18, 2022 at 12:05 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -46,7 +46,7 @@ CREATE TABLE `admin_profile` (
 --
 
 INSERT INTO `admin_profile` (`id`, `shop_logo`, `shop_name`, `shop_address`, `shop_owner`, `username`, `owner_phone`, `owner_email`, `created_at`, `updated_at`) VALUES
-(1, 'http://127.0.0.1:8000/storage/dJ5Byy1aBdScdRCUfgM5YYvbbIvAgz8zCpN3LjST.webp', 'Anwar Super Canteen', 'Polashbari, Ashulia, Dhaka', 'Md Anwar Hossain', 'admin1234', '01794030592', 'anwarhossain7736@gmail.com', NULL, NULL);
+(1, 'http://127.0.0.1:8000/storage/gJz3znPRRbX6BEzNJEATxSK9yt5c0QNHojUsMbE6.webp', 'AS Super Canteen', 'Polashbari, Ashulia, Dhaka', 'Md Anwar Hossain', 'admin1234', '01794030592', 'anwarhossain7736@gmail.com', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -230,7 +230,9 @@ INSERT INTO `monthly_statements` (`id`, `year`, `month`, `token_no`, `total_lunc
 (3, 2022, 'January', 142782, 2, 120, 2, 100, 4, 220, 220.00, 0.00, 0.00, NULL, NULL),
 (4, 2022, 'February', 142782, 11, 660, 10, 500, 21, 1160, 1000.00, 160.00, 0.00, NULL, NULL),
 (5, 2022, 'February', 192328, 9, 540, 8, 400, 17, 940, 500.00, 440.00, 0.00, NULL, NULL),
-(6, 2022, 'February', 824720, 1, 60, 1, 50, 2, 110, 0.00, 110.00, 0.00, NULL, NULL);
+(6, 2022, 'February', 824720, 1, 60, 1, 50, 2, 110, 0.00, 110.00, 0.00, NULL, NULL),
+(7, 2022, 'March', 142782, 1, 60, 1, 50, 2, 110, 0.00, 110.00, 0.00, NULL, NULL),
+(8, 2022, 'March', 824720, 1, 60, 1, 50, 2, 110, 0.00, 110.00, 0.00, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -301,6 +303,7 @@ CREATE TABLE `order_meals` (
   `dinner_amount` int(11) NOT NULL,
   `total_meal` int(11) NOT NULL,
   `total_amount` int(11) NOT NULL,
+  `notes` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meal_given_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -311,26 +314,30 @@ CREATE TABLE `order_meals` (
 -- Dumping data for table `order_meals`
 --
 
-INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`, `dinner`, `dinner_amount`, `total_meal`, `total_amount`, `meal_given_date`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(24, 3, 121245, 5, 300, 5, 250, 10, 550, '2022-01-26', NULL, '2022-01-26 17:01:12', '2022-01-26 11:01:48'),
-(25, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-27', NULL, '2022-01-26 17:02:55', '2022-01-26 17:02:55'),
-(26, 5, 475214, 2, 120, 2, 100, 4, 220, '2022-01-27', NULL, '2022-01-26 17:05:01', '2022-01-26 17:05:01'),
-(29, 3, 121245, 1, 60, 1, 50, 2, 110, '2022-01-31', NULL, '2022-01-30 17:39:37', '2022-01-30 17:39:37'),
-(31, 5, 475214, 1, 60, 1, 50, 2, 110, '2022-02-01', NULL, '2022-01-31 16:43:08', '2022-01-31 16:43:08'),
-(32, 4, 142782, 5, 300, 5, 250, 10, 550, '2022-02-08', NULL, '2022-02-07 15:48:02', '2022-02-07 15:48:02'),
-(33, 10, 192328, 5, 300, 5, 250, 10, 550, '2022-02-08', NULL, '2022-02-07 15:54:23', '2022-02-07 15:54:23'),
-(34, 10, 192328, 2, 120, 1, 50, 3, 170, '2022-02-12', '2022-02-11 09:49:51', '2022-02-11 15:48:37', '2022-02-11 09:49:51'),
-(35, 10, 192328, 1, 60, 1, 50, 2, 110, '2022-02-12', NULL, '2022-02-11 15:50:00', '2022-02-11 15:50:00'),
-(36, 4, 142782, 2, 120, 1, 50, 3, 170, '2022-02-14', '2022-02-13 04:28:43', '2022-02-12 20:24:15', '2022-02-13 04:28:43'),
-(37, 4, 142782, 2, 120, 1, 50, 3, 170, '2022-02-14', '2022-02-13 04:29:12', '2022-02-13 10:28:54', '2022-02-13 04:29:12'),
-(38, 4, 142782, 2, 120, 2, 100, 4, 220, '2022-02-14', NULL, '2022-02-13 10:29:23', '2022-02-13 04:30:17'),
-(39, 10, 192328, 1, 60, 1, 50, 2, 110, '2022-02-15', '2022-02-13 13:04:20', '2022-02-13 18:34:48', '2022-02-13 13:04:20'),
-(40, 9, 824720, 1, 60, 1, 50, 2, 110, '2022-02-15', '2022-02-13 13:05:35', '2022-02-13 18:36:54', '2022-02-13 13:05:35'),
-(41, 4, 142782, 2, 120, 1, 50, 3, 170, '2022-02-15', NULL, '2022-02-13 18:41:30', '2022-02-13 13:19:49'),
-(42, 10, 192328, 3, 180, 2, 100, 5, 280, '2022-02-15', NULL, '2022-02-13 19:07:36', '2022-02-13 13:20:34'),
-(43, 9, 824720, 1, 60, 1, 50, 2, 110, '2022-02-15', NULL, '2022-02-13 19:07:57', '2022-02-13 13:20:28'),
-(44, 4, 142782, 1, 60, 1, 50, 2, 110, '2022-02-21', NULL, '2022-02-20 14:52:51', '2022-02-20 14:52:51'),
-(45, 4, 142782, 1, 60, 1, 50, 2, 110, '2022-02-22', NULL, '2022-02-21 14:52:13', '2022-02-21 14:52:13');
+INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`, `dinner`, `dinner_amount`, `total_meal`, `total_amount`, `notes`, `meal_given_date`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(24, 3, 121245, 5, 300, 5, 250, 10, 550, NULL, '2022-01-26', NULL, '2022-01-26 17:01:12', '2022-01-26 11:01:48'),
+(25, 3, 121245, 1, 60, 1, 50, 2, 110, NULL, '2022-01-27', NULL, '2022-01-26 17:02:55', '2022-01-26 17:02:55'),
+(26, 5, 475214, 2, 120, 2, 100, 4, 220, NULL, '2022-01-27', NULL, '2022-01-26 17:05:01', '2022-01-26 17:05:01'),
+(29, 3, 121245, 1, 60, 1, 50, 2, 110, NULL, '2022-01-31', NULL, '2022-01-30 17:39:37', '2022-01-30 17:39:37'),
+(31, 5, 475214, 1, 60, 1, 50, 2, 110, NULL, '2022-02-01', NULL, '2022-01-31 16:43:08', '2022-01-31 16:43:08'),
+(32, 4, 142782, 5, 300, 5, 250, 10, 550, NULL, '2022-02-08', NULL, '2022-02-07 15:48:02', '2022-02-07 15:48:02'),
+(33, 10, 192328, 5, 300, 5, 250, 10, 550, NULL, '2022-02-08', NULL, '2022-02-07 15:54:23', '2022-02-07 15:54:23'),
+(34, 10, 192328, 2, 120, 1, 50, 3, 170, NULL, '2022-02-12', '2022-02-11 09:49:51', '2022-02-11 15:48:37', '2022-02-11 09:49:51'),
+(35, 10, 192328, 1, 60, 1, 50, 2, 110, NULL, '2022-02-12', NULL, '2022-02-11 15:50:00', '2022-02-11 15:50:00'),
+(36, 4, 142782, 2, 120, 1, 50, 3, 170, NULL, '2022-02-14', '2022-02-13 04:28:43', '2022-02-12 20:24:15', '2022-02-13 04:28:43'),
+(37, 4, 142782, 2, 120, 1, 50, 3, 170, NULL, '2022-02-14', '2022-02-13 04:29:12', '2022-02-13 10:28:54', '2022-02-13 04:29:12'),
+(38, 4, 142782, 2, 120, 2, 100, 4, 220, NULL, '2022-02-14', NULL, '2022-02-13 10:29:23', '2022-02-13 04:30:17'),
+(39, 10, 192328, 1, 60, 1, 50, 2, 110, NULL, '2022-02-15', '2022-02-13 13:04:20', '2022-02-13 18:34:48', '2022-02-13 13:04:20'),
+(40, 9, 824720, 1, 60, 1, 50, 2, 110, NULL, '2022-02-15', '2022-02-13 13:05:35', '2022-02-13 18:36:54', '2022-02-13 13:05:35'),
+(41, 4, 142782, 2, 120, 1, 50, 3, 170, NULL, '2022-02-15', NULL, '2022-02-13 18:41:30', '2022-02-13 13:19:49'),
+(42, 10, 192328, 3, 180, 2, 100, 5, 280, NULL, '2022-02-15', NULL, '2022-02-13 19:07:36', '2022-02-13 13:20:34'),
+(43, 9, 824720, 1, 60, 1, 50, 2, 110, NULL, '2022-02-15', NULL, '2022-02-13 19:07:57', '2022-02-13 13:20:28'),
+(44, 4, 142782, 1, 60, 1, 50, 2, 110, NULL, '2022-02-21', NULL, '2022-02-20 14:52:51', '2022-02-20 14:52:51'),
+(45, 4, 142782, 1, 60, 1, 50, 2, 110, NULL, '2022-02-22', NULL, '2022-02-21 14:52:13', '2022-02-21 14:52:13'),
+(47, 4, 142782, 1, 60, 2, 100, 3, 160, NULL, '2022-03-19', '2022-03-17 15:52:11', '2022-03-17 21:19:50', '2022-03-17 15:52:11'),
+(48, 9, 824720, 1, 60, 1, 50, 2, 110, NULL, '2022-03-19', '2022-03-17 15:52:18', '2022-03-17 21:43:14', '2022-03-17 15:52:18'),
+(49, 9, 824720, 1, 60, 1, 50, 2, 110, 'তরকারিতে ঝাল কম দিয়েন', '2022-03-19', NULL, '2022-03-17 21:53:23', '2022-03-17 15:53:46'),
+(50, 4, 142782, 1, 60, 1, 50, 2, 110, NULL, '2022-03-19', NULL, '2022-03-17 22:50:39', '2022-03-17 16:51:03');
 
 -- --------------------------------------------------------
 
@@ -419,8 +426,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `token_no`, `name`, `username`, `email`, `phone`, `role`, `status`, `password`, `address`, `photo`, `created_at`, `updated_at`) VALUES
-(1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', 'active', '$2y$10$TNTNLwY0bIY0QJlVYm27n.udAn4n8kaRYXvhpFwk/JGbbpwTuJeom', 'Polashbari, Ashulia, Dhaka', NULL, '2022-01-09 09:42:41', '2022-03-15 14:45:57'),
-(4, 142782, 'Shara Enterprise', 'anwar123', 'shara6493@gmail.com', '01795700837', 'user', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/MH81KDFSpYEzifC7CsOWtv0Zeq990qe4HTW2iBPa.jpg', '2022-01-09 09:42:41', '2022-02-20 10:27:42'),
+(1, 101101, 'Md Anwar Hossain', 'admin1234', 'anwarhossain7736@gmail.com', '01794030592', 'admin', 'active', '$2y$10$TNTNLwY0bIY0QJlVYm27n.udAn4n8kaRYXvhpFwk/JGbbpwTuJeom', 'Polashbari, Ashulia, Dhaka', NULL, '2022-01-09 09:42:41', '2022-03-17 17:00:06'),
+(4, 142782, 'Anwar', 'anwar123', 'shara6493@gmail.com', '01795700837', 'user', 'active', '$2y$10$gA2dLvyNMSdZ1ZjahqksLOHWrxOQTvVU1NMvWl1xhvVqhCcLCSapu', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/MH81KDFSpYEzifC7CsOWtv0Zeq990qe4HTW2iBPa.jpg', '2022-01-09 09:42:41', '2022-02-20 10:27:42'),
 (9, 824720, 'Sujon', 'sujon123', 'mdshahjahansheikh1995@gmail.com', '01715414525', 'user', 'active', '$2y$10$ms.dc/xaupEwF9pMrSMtk.nH6XlqUEH/tMMZwaP3fyil3S4roWKM2', 'Savar,Dhaka', 'http://127.0.0.1:8000/storage/b014cQa0nAq1FfYzoDJw6eQTlumqhADg2qnFRWzk.jpg', '2022-02-06 10:42:12', '2022-02-20 09:40:08'),
 (10, 192328, 'Shara Enterprise', 'shara1234', 'shara_enterprise@yahoo.com', '01715424526', 'user', 'inactive', '$2y$10$l205ZeJruxRam8TgnHI6Se1JUF/cRD2HFa0S7rceNgdrWBwZ14YKi', 'Polashbari, Ashulia, Dhaka', 'http://127.0.0.1:8000/storage/US8GKKLqrkhlsT8dISBNQpmSYO3tUaix3KbYI5Ex.jpg', '2022-02-06 11:28:12', '2022-02-20 09:44:24'),
 (11, 515874, 'Md Ariful Islam', 'ariful123', 'arifmiah8044@gmail.com', '01700000000', 'user', 'active', '$2y$10$ZTdX6tEX6Q.hv31Mf82TxusSrWi5EisBFnwb.3RBp2BaEKhbpCjLK', 'Tangail, Dhaka.', 'http://127.0.0.1:8000/storage/wHzyfH4pSsQgWZzbeBdOIwfJPZ97Z3CalexxVpOD.jpg', '2022-02-16 09:17:49', '2022-02-16 13:13:57');
@@ -562,13 +569,13 @@ ALTER TABLE `meal_rates`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `monthly_statements`
 --
 ALTER TABLE `monthly_statements`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -586,7 +593,7 @@ ALTER TABLE `notification_details`
 -- AUTO_INCREMENT for table `order_meals`
 --
 ALTER TABLE `order_meals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `payments`
