@@ -10,8 +10,11 @@ use App\Models\MonthlyStatement;
 
 class OrderMealController extends Controller
 {
+    public $delivery_charge = 10;
+
     public function CountSummary($token_no)
     {
+        
         $first_day = date('Y-m-d', strtotime('first day of this month'));
         $last_day = date('Y-m-d', strtotime('last day of this month'));
 
@@ -23,12 +26,15 @@ class OrderMealController extends Controller
 
         $total_dinner = OrderMeal::where('token_no', $token_no)
                             ->whereBetween('meal_given_date', [$first_day, $last_day])
-                            ->sum('dinner');
+                            ->sum('dinner'); 
+        $total_delivery_cost = OrderMeal::where('token_no', $token_no)
+                            ->whereBetween('meal_given_date', [$first_day, $last_day])
+                            ->sum('delivery_charge');
         $dinner_cost = $meal_rate->dinner_rate * $total_dinner;
 
         $total_meal = $total_lunch + $total_dinner;
 
-        $total_cost = $lunch_cost +  $dinner_cost;
+        $total_cost = $lunch_cost +  $dinner_cost + $total_delivery_cost;
 
         $total_payment = Payment::where('token_no', $token_no)
                                 ->whereBetween('payment_date', [$first_day, $last_day])
@@ -74,7 +80,8 @@ class OrderMealController extends Controller
         $token_no        =  $req->token_no;
         $lunch           =  (int)$req->lunch;
         $dinner          =  (int)$req->dinner;
-        $notes           = $req->notes;
+        $parcel          =  $req->parcel;
+        $notes           =  $req->notes;
         $total_meal      =  $lunch + $dinner;
         
         $user = User::where('token_no', $token_no)->first();
@@ -111,7 +118,15 @@ class OrderMealController extends Controller
             $order->dinner = $dinner;
             $order->dinner_amount = $dinner_amount;
             $order->total_meal = $total_meal;
-            $order->total_amount = $total_amount;
+            if($parcel)
+            {
+                $order->delivery_charge = $this->delivery_charge;
+                $order->is_parcel = 'Yes';
+                $order->total_amount = $total_amount + $this->delivery_charge;
+            }
+            else{
+                $order->total_amount = $total_amount;
+            }
             $order->notes = $notes;
             $order->meal_given_date = $meal_given_date;
             $result = $order->save();
@@ -214,6 +229,7 @@ class OrderMealController extends Controller
         $token_no      =  $req->token_no;
         $lunch         =  (int)$req->lunch;
         $dinner        =  (int)$req->dinner;
+        $parcel        =  $req->parcel;
         $total_meal    =  $lunch + $dinner;
         $notes         =  $req->notes;
         $meal_rates    =  MealRate::first();
@@ -229,7 +245,17 @@ class OrderMealController extends Controller
         $ordered_meal->dinner = $dinner;
         $ordered_meal->dinner_amount = $dinner_amount;
         $ordered_meal->total_meal = $total_meal;
-        $ordered_meal->total_amount = $total_amount;
+        if($parcel)
+        {
+            $ordered_meal->delivery_charge = $this->delivery_charge;
+            $ordered_meal->is_parcel = 'Yes';
+            $ordered_meal->total_amount = $total_amount + $this->delivery_charge;
+        }
+        else{
+            $ordered_meal->delivery_charge = 0;
+            $ordered_meal->is_parcel = 'No';
+            $ordered_meal->total_amount = $total_amount;
+        }
         $ordered_meal->notes = $notes;
         $result = $ordered_meal->save();
         if($result)
@@ -252,6 +278,14 @@ class OrderMealController extends Controller
         ]);
             return $result;
         }
+    }
+
+    public function ChangeMealStatus(Request $req)
+    {
+        $order_id = $req->order_id;
+        $meal_status = $req->meal_status;
+        $result = OrderMeal::where('id', $order_id)->update(['status'=>$meal_status]);
+        return $result;
     }
 
     public function DeleteTodayOrderedMeal(Request $req)

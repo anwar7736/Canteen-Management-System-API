@@ -90,6 +90,7 @@ Route::get('/GetTodayOrderInfo/{user_id}/{token_no}', [OrderMealController::clas
 Route::get('/GetTodayAllOrderInfo', [OrderMealController::class, 'GetTodayAllOrderInfo']);
 Route::get('/GetTodayOrderInfoByOrderId/{order_id}', [OrderMealController::class, 'GetTodayOrderInfoByOrderId']);
 Route::post('/ChangeOrderedMeal', [OrderMealController::class, 'ChangeOrderedMeal']);
+Route::post('/ChangeMealStatus', [OrderMealController::class, 'ChangeMealStatus']);
 Route::get('/DeleteTodayOrderedMeal/{order_id}', [OrderMealController::class, 'DeleteTodayOrderedMeal']);
 Route::get('/RestoreTodayOrderedMeal/{order_id}', [OrderMealController::class, 'RestoreTodayOrderedMeal']);
 

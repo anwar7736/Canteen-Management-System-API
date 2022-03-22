@@ -21,8 +21,8 @@ class DayWiseMealController extends Controller
         $order_id = $req->order_id;
         $data = OrderMeal::where('id', $order_id)->first();
         $user_id = $data->user_id;
-        $details = DB::table('order_meals')
-                ->join('users', 'order_meals.user_id', 'users.id')
+        $details = DB::table('users')
+                ->join('order_meals', 'order_meals.user_id', 'users.id')
                 ->where(['order_meals.id'=>$order_id])
                 ->get();
                 

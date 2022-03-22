@@ -22,7 +22,10 @@ class CreateOrderMealsTable extends Migration
             $table->integer('dinner');
             $table->integer('dinner_amount');
             $table->integer('total_meal');
+            $table->float('delivery_charge',8, 2)->default(0);
             $table->integer('total_amount');
+            $table->string('is_parcel')->default('No');
+            $table->string('status')->default('Processing');
             $table->string('notes', 1000)->nullable();
             $table->string('meal_given_date');
             $table->softDeletes();
