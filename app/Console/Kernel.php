@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-
+use Storage;
 class Kernel extends ConsoleKernel
 {
 
@@ -13,7 +13,16 @@ class Kernel extends ConsoleKernel
         //Daily order reminder
         // $schedule->command('daily:order')
         //          ->timezone('Asia/Dhaka')
-        //          ->dailyAt('22:00');
+        //          ->dailyAt('22:00'); 
+        
+        //Change daily meal status
+        // $schedule->command('status:pending')
+        //          ->timezone('Asia/Dhaka')
+        //          ->dailyAt('21:44'); 
+
+        // //Daily Database Backup
+        // $schedule->command('backup:clean')->timezone('Asia/Dhaka')->dailyAt('22:09');
+        // $schedule->command('backup:run')->timezone('Asia/Dhaka')->dailyAt('22:09');
 
         //Some payment reminder
         // $schedule->command('some:payment')
