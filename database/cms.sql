@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 11:46 PM
+-- Generation Time: Mar 23, 2022 at 05:13 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.1
 
@@ -231,7 +231,7 @@ INSERT INTO `monthly_statements` (`id`, `year`, `month`, `token_no`, `total_lunc
 (4, 2022, 'February', 142782, 11, 660, 10, 500, 21, 1160, 1000.00, 160.00, 0.00, NULL, NULL),
 (5, 2022, 'February', 192328, 9, 540, 8, 400, 17, 940, 500.00, 440.00, 0.00, NULL, NULL),
 (6, 2022, 'February', 824720, 1, 60, 1, 50, 2, 110, 0.00, 110.00, 0.00, NULL, NULL),
-(7, 2022, 'March', 142782, 4, 240, 4, 200, 8, 440, 1000.00, 0.00, 560.00, NULL, NULL),
+(7, 2022, 'March', 142782, 4, 240, 4, 200, 8, 450, 4402.00, 0.00, 3952.00, NULL, NULL),
 (8, 2022, 'March', 824720, 1, 60, 1, 50, 2, 110, 0.00, 110.00, 0.00, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -305,7 +305,7 @@ CREATE TABLE `order_meals` (
   `delivery_charge` double(8,2) NOT NULL DEFAULT 0.00,
   `total_amount` int(11) NOT NULL,
   `is_parcel` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'No',
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Processing',
   `notes` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `meal_given_date` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -332,11 +332,12 @@ INSERT INTO `order_meals` (`id`, `user_id`, `token_no`, `lunch`, `lunch_amount`,
 (43, 9, 824720, 1, 60, 1, 50, 2, 0.00, 110, 'No', 'Completed', NULL, '2022-02-15', NULL, '2022-02-13 19:07:57', '2022-02-13 13:20:28'),
 (44, 4, 142782, 1, 60, 1, 50, 2, 0.00, 110, 'No', 'Completed', NULL, '2022-02-21', NULL, '2022-02-20 14:52:51', '2022-02-20 14:52:51'),
 (45, 4, 142782, 1, 60, 1, 50, 2, 0.00, 110, 'No', 'Completed', NULL, '2022-02-22', NULL, '2022-02-21 14:52:13', '2022-02-21 14:52:13'),
-(49, 9, 824720, 1, 60, 1, 50, 2, 0.00, 110, 'No', 'Completed', 'তরকারিতে ঝাল কম দিয়েন', '2022-03-19', NULL, '2022-03-17 21:53:23', '2022-03-17 15:53:46'),
-(50, 4, 142782, 1, 60, 1, 50, 2, 0.00, 110, 'No', 'Completed', NULL, '2022-03-19', NULL, '2022-03-17 22:50:39', '2022-03-17 16:51:03'),
-(51, 4, 142782, 1, 60, 1, 50, 2, 0.00, 110, 'Yes', 'Completed', NULL, '2022-03-21', NULL, '2022-03-19 18:42:55', '2022-03-19 18:42:55'),
+(49, 9, 824720, 1, 60, 1, 50, 2, 0.00, 110, 'No', 'Completed', 'তরকারিতে ঝাল কম দিয়েন', '2022-03-22', NULL, '2022-03-17 21:53:23', '2022-03-17 15:53:46'),
+(50, 4, 142782, 1, 60, 1, 50, 2, 0.00, 110, 'No', 'Pending', NULL, '2022-03-22', NULL, '2022-03-17 22:50:39', '2022-03-23 09:44:00'),
+(51, 4, 142782, 1, 60, 1, 50, 2, 0.00, 110, 'Yes', 'Pending', NULL, '2022-03-22', NULL, '2022-03-19 18:42:55', '2022-03-23 09:44:00'),
 (52, 4, 142782, 1, 60, 1, 50, 2, 0.00, 110, 'Yes', 'Completed', NULL, '2022-03-23', NULL, '2022-03-22 17:53:15', '2022-03-22 16:45:44'),
-(99, 4, 142782, 1, 60, 1, 50, 2, 0.00, 110, 'No', 'Processing', NULL, '2022-03-24', NULL, '2022-03-22 21:31:18', '2022-03-22 16:44:59');
+(99, 4, 142782, 1, 60, 1, 50, 2, 0.00, 110, 'No', 'Processing', NULL, '2022-03-24', '2022-03-23 09:15:31', '2022-03-22 21:31:18', '2022-03-23 09:15:31'),
+(100, 4, 142782, 1, 60, 1, 50, 2, 10.00, 120, 'Yes', 'Completed', 'আমাকে একটু ভাত বেশি করে দিয়েন', '2022-03-24', NULL, '2022-03-23 15:19:10', '2022-03-23 09:20:17');
 
 -- --------------------------------------------------------
 
@@ -380,7 +381,16 @@ INSERT INTO `payments` (`id`, `year`, `month`, `name`, `token_no`, `email`, `pho
 (18, 2022, 'February', 'Shara Enterprise', '192328', 'shara_enterprise@yahoo.com', '01715424526', 100.00, 'Polashbari, Ashulia, Dhaka', '620FB9800269E', 'Completed', 'BDT', '2022-02-18', '09:21:36pm'),
 (20, 2022, 'February', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 500.00, 'Polashbari, Ashulia, Dhaka', '6213B8694BB53', 'Processing', 'BDT', '2022-02-21', '10:06:01pm'),
 (21, 2022, 'March', 'Md Anwar Hossain', '123456', 'abc@gmail.com', '01794030592', 1000.00, 'Polashbari, Ashulia, Dhaka', '62362471F1366', 'Pending', 'BDT', '2022-03-20', '12:44:02am'),
-(22, 2022, 'March', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 1000.00, 'Polashbari, Ashulia, Dhaka', '623624C00C90F', 'Canceled', 'BDT', '2022-03-20', '12:45:20am');
+(22, 2022, 'March', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 1000.00, 'Polashbari, Ashulia, Dhaka', '623624C00C90F', 'Canceled', 'BDT', '2022-03-20', '12:45:20am'),
+(23, 2022, 'March', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '623B3AF5650D7', 'Pending', 'BDT', '2022-03-23', '09:21:25pm'),
+(24, 2022, 'March', 'Md Anwar Hossain', '123456', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '623B3B0CF33A4', 'Pending', 'BDT', '2022-03-23', '09:21:49pm'),
+(25, 2022, 'March', 'Md Anwar Hossain', '121245', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '623B3B1532B71', 'Pending', 'BDT', '2022-03-23', '09:21:57pm'),
+(26, 2022, 'March', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '623B3B35E797A', 'Pending', 'BDT', '2022-03-23', '09:22:29pm'),
+(27, 2022, 'March', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '623B3B69107C6', 'Pending', 'BDT', '2022-03-23', '09:23:21pm'),
+(28, 2022, 'March', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 100.50, 'Polashbari, Ashulia, Dhaka', '623B3B9F0E10E', 'Pending', 'BDT', '2022-03-23', '09:24:15pm'),
+(29, 2022, 'March', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 1000.00, 'Polashbari, Ashulia, Dhaka', '623B3C7C50E06', 'Pending', 'BDT', '2022-03-23', '09:27:56pm'),
+(30, 2022, 'March', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 1000.00, 'Polashbari, Ashulia, Dhaka', '623B3CCAB323A', 'Pending', 'BDT', '2022-03-23', '09:29:14pm'),
+(31, 2022, 'March', 'Md Anwar Hossain', '142782', 'abc@gmail.com', '01794030592', 1000.00, 'Polashbari, Ashulia, Dhaka', '623B3CDD27FE1', 'Pending', 'BDT', '2022-03-23', '09:29:33pm');
 
 -- --------------------------------------------------------
 
@@ -594,13 +604,13 @@ ALTER TABLE `notification_details`
 -- AUTO_INCREMENT for table `order_meals`
 --
 ALTER TABLE `order_meals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
