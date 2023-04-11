@@ -10,7 +10,7 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -43,7 +43,7 @@
                <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="firstName">Choose Year</label>
-                        <select class="form-control" name="year">
+                        <select class="form-control select2" name="year">
                             <option value="" selected disabled>Choose Payment Year</option>
                             <option value={{date('Y')}}>{{date('Y')}}</option>
                             <option value={{date('Y', strtotime('-1 year'))}}>{{date('Y', strtotime('-1 year'))}}</option>
@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="month">Choose Month</label>
-                         <select class="form-control" name="month">
+                         <select class="form-control select2" name="month">
                             <option value="" selected disabled>Choose Payment Month</option>
                             <option value="January">January</option>
                             <option value="February">February</option>
@@ -84,8 +84,12 @@
                 <div class="mb-3">
                     <label for="mobile">Your Token Number</label>
                     <div class="input-group">
-                        <input type="text" name="customer_token" class="form-control" id="token_no" placeholder="Enter your token number"
-                                required>
+                        <select name="customer_token" class="form-control select2" id="token_no">
+                            <option value="">Please Select Your Token No</option>
+                            @foreach($tokens as $item)
+                            <option value="{{ $item->token_no }}">{{ $item->token_no }}</option>
+                            @endforeach
+                        </select>
                         <div class="invalid-feedback" style="width: 100%;">
                             Your Mobile number is required.
                         </div>
@@ -156,13 +160,19 @@
         </ul>
     </footer>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <script>
+            $(function() {
+                $('.select2').select2();
+            });
+        </script>
 </html>

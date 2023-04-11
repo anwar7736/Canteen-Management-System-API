@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use App\Library\SslCommerz\SslCommerzNotification;
 use App\Models\MonthlyStatement;
+use App\Models\User;
 
 class SslCommerzPaymentController extends Controller
 {
@@ -17,7 +18,8 @@ class SslCommerzPaymentController extends Controller
 
     public function onlineSSLPayment()
     {
-        return view('onlineSSLPayment');
+        $tokens = User::get('token_no');
+        return view('onlineSSLPayment', compact('tokens'));
     }
 
     public function index(Request $request)
@@ -98,10 +100,10 @@ class SslCommerzPaymentController extends Controller
                     'token_no'=>$post_data['cus_token']
                     ])->first(); 
 
-                $total_cost = $previous_data->total_cost;
-                $old_total_payment = $previous_data->total_payment;
-                $last_total_payment = $old_total_payment + $post_data['total_amount'];
-                $give_take = $total_cost - $last_total_payment;
+                $total_cost = $previous_data->total_cost ?? 0;
+                $old_total_payment = $previous_data->total_payment ?? 0;
+                $last_total_payment = $old_total_payment + $post_data['total_amount'] ?? 0;
+                $give_take = $total_cost - $last_total_payment ?? 0;
 
                 $give = '';
                 $take = '';
